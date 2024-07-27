@@ -5,6 +5,8 @@
     - cd linkedin
     - npx create-react-app .
         - delete the icon, test.js file and app.css code in src folder
+    - npm start : check running server
+    
 
 - configure tailwind from website steps
     - follow https://tailwindcss.com/docs/guides/create-react-app
