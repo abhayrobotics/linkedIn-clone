@@ -66,3 +66,8 @@
     - import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
     - <LinkedInIcon  sx={{ fontSize: 40 }} color="primary"/>
+
+
+## standard 
+
+-   px-2 py-3 my-2
