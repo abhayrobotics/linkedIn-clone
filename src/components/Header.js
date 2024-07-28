@@ -35,7 +35,7 @@ const Header = () => {
               className="text-slate-400 hover:text-black "
               sx={{ fontSize: 25 }}
             />
-           <p className=" text-xs  text-slate-600 scroll ">My Network</p>
+           <p className=" text-xs  text-slate-600 scroll text-nowrap ">My Network</p>
           </div>
 
           <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
@@ -67,7 +67,7 @@ const Header = () => {
               className="text-slate-400 hover:text-black "
               sx={{ fontSize: 25 }}
             />
-            <p className=" text-xs  text-slate-600 scroll "> {userName==null?"My Account":userName}</p>
+            <p className=" text-xs  text-slate-600 scroll text-nowrap"> {userName==null?"My Account":userName}</p>
           </div>
 
         </div>

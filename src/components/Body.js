@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./Login";
 import Feed from "./Feed";
-import Profile from "./Profile";
+
+import AccountPage from "./AccountPage";
 
 
 
@@ -16,8 +17,8 @@ const Body = () => {
       element: <Feed />,
     },
     {
-        path:"/profile",
-        element:<Profile/>
+        path:"/account",
+        element:<AccountPage/>
 
     }
   ]);

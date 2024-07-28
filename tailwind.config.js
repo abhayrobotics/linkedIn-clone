@@ -9,6 +9,7 @@ module.exports = {
       colors:{
         "mainColor":"#0a66c2",
         "maindark":"#004182",
+        "feedColor":"#f4f2ee",
       }
     },
   },

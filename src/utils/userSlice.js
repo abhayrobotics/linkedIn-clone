@@ -7,7 +7,8 @@ const userSlice = createSlice({
     initialState:{
         userName:null,
         email:null,
-        errorMessage:null
+        errorMessage:null,
+        imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4"
     },
     reducers:{
         addUserName:(state,action)=>{
