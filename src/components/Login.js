@@ -1,41 +1,76 @@
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import { useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
 import { auth } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const Login = () => {
+  const [signIn, setSignIn] = useState(true);
+
   const email1 = useRef();
   const password1 = useRef();
+  const navigate = useNavigate();
 
-  // sign up
+
+// toggle sign in
+  const handleSigIn =()=>{
+    setSignIn(!signIn);
+  }
+
+  // ********************sign In via email password
   const handleSignup = () => {
-    console.log(email1.current.value, password1.current.value);
+    // console.log(email1.current.value, password1.current.value);
 
-    createUserWithEmailAndPassword(
-      auth,
-      email1.current.value,
-      password1.current.value
-    )
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        // ...
-        console.log("signup sucess");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
-        // ..
-      });
+    // if false then sign UP
+    if (!signIn) {
+      createUserWithEmailAndPassword(
+        auth,
+        email1.current.value,
+        password1.current.value
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+          console.log("signup sucess");
+          navigate("/feed");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          // ..
+        });
+    }
+
+    // if true then sign in
+    if (signIn) {
+      signInWithEmailAndPassword(
+        auth,
+        email1.current.value,
+        password1.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log("signIN success")
+          // ...
+          navigate("/feed");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
+    }
   };
-
+  // *********************** sign in via google
   const googleSignup = () => {
     const provider = new GoogleAuthProvider();
 
@@ -48,7 +83,7 @@ const Login = () => {
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
         // ...
-        console.log(user)
+        console.log(user);
       })
       .catch((error) => {
         // Handle Errors here.
@@ -73,7 +108,7 @@ const Login = () => {
       <div className="flex justify-center  mt-10">
         <div className="flex flex-col  w-[350px]  p-2 sm:p-6 shadow-lg hover:shadow-xl rounded-lg ">
           <div>
-            <h2 className="text-3xl mb-1">Sign In</h2>
+            <h2 className="text-3xl mb-1">{signIn?"Sign In":"Sign Up"}</h2>
             <h3 className="text-sm">
               Stay updated on your professional world.
             </h3>
@@ -93,12 +128,15 @@ const Login = () => {
               type="password"
               placeholder="Password"
             />
-
+            <div className="text-xs my-2">
+            By clicking , you agree to LinkedIn’s User Agreement,
+            Privacy Policy, and Cookie Policy.
+          </div>
             <button
               onClick={handleSignup}
               className="bg-mainColor hover:bg-maindark my-2 py-3 rounded-3xl text-white cursor-pointer font-semibold  "
             >
-              Sign in
+              {signIn?"Sign In":"Agree & Join"}
             </button>
           </form>
           {/* ****************** separator************************* */}
@@ -107,10 +145,7 @@ const Login = () => {
             <p>or</p>
             <div className="bg-slate-300 h-[1px] min-w-32 mx-2"></div>
           </div>
-          <div className="text-xs mb-2">
-            By clicking Continue, you agree to LinkedIn’s User Agreement,
-            Privacy Policy, and Cookie Policy.
-          </div>
+          
 
           <button
             onClick={googleSignup}
@@ -119,13 +154,15 @@ const Login = () => {
             <img className="mr-2" src={google} />
             <p>Continue with Google</p>
           </button>
+         
 
           <div className="ml-2 my-2 text-center">
-            New to LinkedIn?{" "}
-            <span className="text-mainColor cursor-pointer  px-3 py-1  hover:bg-maindark hover:text-white  rounded-xl font-semibold">
-              Join now
+            {signIn? "New to LinkedIn ?":"Already a user ?"}
+            <span onClick={handleSigIn} className="ml-2 text-mainColor cursor-pointer  px-3 py-1  hover:bg-maindark hover:text-white  rounded-xl font-semibold">
+            {signIn? "Join now":"Sign In"}
             </span>
           </div>
+          
         </div>
       </div>
     </div>
