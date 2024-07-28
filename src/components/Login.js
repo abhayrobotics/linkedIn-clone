@@ -98,6 +98,8 @@ const Login = () => {
         console.log(user);
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(user.displayName));
+
+        navigate("/feed")
       })
       .catch((error) => {
         // Handle Errors here.

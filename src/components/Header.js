@@ -1,3 +1,5 @@
+import {useSelector} from "react-redux";
+
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
@@ -7,7 +9,10 @@ import TextsmsIcon from "@mui/icons-material/Textsms";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+
 const Header = () => {
+
+    const userName = useSelector(store=>store.user.userName);
   return (
     <div className="flex justify-center">
       <div className="flex justify-between max-w-7/12 w-4/6">
@@ -62,12 +67,11 @@ const Header = () => {
               className="text-slate-400 hover:text-black "
               sx={{ fontSize: 25 }}
             />
-            <p className=" text-xs  text-slate-600 scroll ">Account</p>
+            <p className=" text-xs  text-slate-600 scroll "> {userName==null?"My Account":userName}</p>
           </div>
 
         </div>
       </div>
-      <hr/>
     </div>
   );
 };
