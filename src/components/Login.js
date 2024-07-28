@@ -72,6 +72,8 @@ const Login = () => {
           const user = userCredential.user;
           console.log("signIN success");
           // ...
+          dispatch(addUserEmail(email1.current.value));
+          dispatch(addUserName(email1.current.value.split("@")[0]));
           navigate("/feed");
         })
         .catch((error) => {

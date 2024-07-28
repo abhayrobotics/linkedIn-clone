@@ -10,8 +10,9 @@
 
 ## Features to add
 
-- login page
-- firebase authentication
+- login page✅
+- login Error Handling✅
+- firebase authentication✅
 - Header
 - icon in header + search functionality
 - create a post :like share comment , reply to a comment
@@ -232,6 +233,7 @@ export default Body;
 
     export default App;
     ```
+
 ## standard
 
 - px-2 py-3 my-2

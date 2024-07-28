@@ -1,8 +1,10 @@
-
+import Header from "./Header"
 
 const Feed = () => {
   return (
-    <div>Feed</div>
+    <div>
+      <Header />
+    </div>
   )
 }
 
