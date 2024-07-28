@@ -3,6 +3,10 @@
 - React
 - react-router-dom
 - tailwind
+- Material UI icons
+- Firebase Authentication
+- redux Toolkit
+
 
 ## Features to add
 
@@ -13,10 +17,12 @@
 - create a post :like share comment , reply to a comment
 - search with gemini ai, post with ai
 - firebase cloudstore
--
+- lazy loading
+- memoization
 
 # STEP BY STEP GUIDE
 
+## React Setup
 - open terminal
   - cd linkedin
   - npx create-react-app .
@@ -166,6 +172,66 @@ export default Body;
   };
   ```
 
+## Redux Setup
+-  install Redux and itds toolkit
+    - npm i react-redux
+    - npm i -D @reduxjs/toolkit 
+- created redux using user slice
+
+    ```javascript
+        import { createSlice } from "@reduxjs/toolkit";
+
+
+        const userSlice = createSlice({
+        name:"user",
+        initialState:{
+            userName:null,
+            email:null
+        },
+        reducers:{
+            addUserName:(state,action)=>{
+                state.userName =action.payload;
+            },
+            addUserEmail:(state,action)=>{
+                state.email =action.payload;
+            }
+        }
+        })
+
+        export {addUserName,addUserEmail} from userSlice.actions;
+        export default userSlice.reducer;
+    ```
+-   create an appstore
+
+    ```javascript
+    import  {configureStore} from "@reduxjs/toolkit"
+    import  userReducer  from "./userSlice";
+
+    const appStore = configureStore({
+        reducer:{
+            user:userReducer,
+        }
+    })
+
+    export default appStore;```
+
+-   link the app store to our main app
+    ``` javascript
+    import Body from './components/Body';
+    import {Provider} from "react-redux"
+    import appStore from './utils/appStore';
+
+    function App() {
+    return (
+        <Provider store={appStore}>
+
+        <Body />
+        </Provider>
+    );
+    }
+
+    export default App;
+    ```
 ## standard
 
 - px-2 py-3 my-2

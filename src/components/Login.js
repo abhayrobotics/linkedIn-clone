@@ -10,19 +10,23 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addErrorMessage, addUserEmail, addUserName } from "../utils/userSlice";
 
 const Login = () => {
   const [signIn, setSignIn] = useState(true);
 
   const email1 = useRef();
   const password1 = useRef();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const errorMes = useSelector((store)=>store.user.errorMessage)
+  
 
-
-// toggle sign in
-  const handleSigIn =()=>{
+  // toggle sign in
+  const handleSigIn = () => {
     setSignIn(!signIn);
-  }
+  };
 
   // ********************sign In via email password
   const handleSignup = () => {
@@ -36,16 +40,22 @@ const Login = () => {
         password1.current.value
       )
         .then((userCredential) => {
-          // Signed up
           const user = userCredential.user;
           // ...
           console.log("signup sucess");
+          // addding user data
+          dispatch(addUserEmail(email1.current.value));
+          dispatch(addUserName(email1.current.value.split("@")[0]));
+
+          // nagivation if sucess
           navigate("/feed");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorMessage);
+
+          dispatch(addErrorMessage(errorMessage));
           // ..
         });
     }
@@ -60,13 +70,15 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log("signIN success")
+          console.log("signIN success");
           // ...
           navigate("/feed");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+
+          dispatch(addErrorMessage(errorMessage));
         });
     }
   };
@@ -81,9 +93,9 @@ const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
         console.log(user);
+        dispatch(addUserEmail(user.email));
+        dispatch(addUserName(user.displayName));
       })
       .catch((error) => {
         // Handle Errors here.
@@ -94,6 +106,8 @@ const Login = () => {
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
+        console.log(errorMessage);
+        dispatch(addErrorMessage(errorMessage));
       });
   };
 
@@ -108,7 +122,7 @@ const Login = () => {
       <div className="flex justify-center  mt-10">
         <div className="flex flex-col  w-[350px]  p-2 sm:p-6 shadow-lg hover:shadow-xl rounded-lg ">
           <div>
-            <h2 className="text-3xl mb-1">{signIn?"Sign In":"Sign Up"}</h2>
+            <h2 className="text-3xl mb-1">{signIn ? "Sign In" : "Sign Up"}</h2>
             <h3 className="text-sm">
               Stay updated on your professional world.
             </h3>
@@ -124,19 +138,23 @@ const Login = () => {
             />
             <input
               ref={password1}
-              className="px-2 py-3 my-2 border text-lg border-slate-400 rounded-md"
+              className="px-2 py-3 my-2 border text-lg border-slate-400  rounded-md"
               type="password"
               placeholder="Password"
             />
-            <div className="text-xs my-2">
-            By clicking , you agree to LinkedIn’s User Agreement,
-            Privacy Policy, and Cookie Policy.
-          </div>
+            {errorMes &&
+            <div className="text-sm  text-red-600 font-semibold my-2">
+              {errorMes.split(":")[1]}
+            </div>}
+            <div className="text-xs  my-2">
+              By clicking , you agree to LinkedIn’s User Agreement, Privacy
+              Policy, and Cookie Policy.
+            </div>
             <button
               onClick={handleSignup}
               className="bg-mainColor hover:bg-maindark my-2 py-3 rounded-3xl text-white cursor-pointer font-semibold  "
             >
-              {signIn?"Sign In":"Agree & Join"}
+              {signIn ? "Sign In" : "Agree & Join"}
             </button>
           </form>
           {/* ****************** separator************************* */}
@@ -145,7 +163,6 @@ const Login = () => {
             <p>or</p>
             <div className="bg-slate-300 h-[1px] min-w-32 mx-2"></div>
           </div>
-          
 
           <button
             onClick={googleSignup}
@@ -154,15 +171,16 @@ const Login = () => {
             <img className="mr-2" src={google} />
             <p>Continue with Google</p>
           </button>
-         
 
           <div className="ml-2 my-2 text-center">
-            {signIn? "New to LinkedIn ?":"Already a user ?"}
-            <span onClick={handleSigIn} className="ml-2 text-mainColor cursor-pointer  px-3 py-1  hover:bg-maindark hover:text-white  rounded-xl font-semibold">
-            {signIn? "Join now":"Sign In"}
+            {signIn ? "New to LinkedIn ?" : "Already a user ?"}
+            <span
+              onClick={handleSigIn}
+              className="ml-2 text-mainColor cursor-pointer  px-3 py-1  hover:bg-maindark hover:text-white  rounded-xl font-semibold"
+            >
+              {signIn ? "Join now" : "Sign In"}
             </span>
           </div>
-          
         </div>
       </div>
     </div>
