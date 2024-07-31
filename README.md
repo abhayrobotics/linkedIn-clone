@@ -13,13 +13,28 @@
 - login page✅
 - login Error Handling✅
 - firebase authentication✅
-- Header
+- Header✅
 - icon in header + search functionality
 - create a post :like share comment , reply to a comment
 - search with gemini ai, post with ai
 - firebase cloudstore
 - lazy loading
 - memoization
+- messaging 
+- multiple user signup handling
+- page for people to follow.
+
+
+## File Structure
+  - Login 
+  - feed
+      - Header
+      - Profile
+      - NewPost
+      - Post(multiple)
+      - News
+  - Account Page
+
 
 # STEP BY STEP GUIDE
 
