@@ -3,11 +3,13 @@ import Profile from "./Profile";
 import NewPost from "./NewPost";
 import Post from "./Post";
 import News from "./News";
+import CreatePost from "./CreatePost";
 
 
 const Feed = () => {
   return (
     <div>
+      <CreatePost />
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 " >
         <div className=" flex justify-center flex-wrap flex-col sm:flex-row  w-4/6 ">

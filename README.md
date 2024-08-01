@@ -15,9 +15,9 @@
 - firebase authentication✅
 - Header✅
 - icon in header + search functionality
-- create a post :like share comment , reply to a comment
-- search with gemini ai, post with ai
+- create a post :like share comment , reply to a comment 
 - firebase cloudstore
+- search with gemini ai, post with ai
 - lazy loading
 - memoization
 - messaging 
@@ -30,7 +30,7 @@
   - feed
       - Header
       - Profile
-      - NewPost
+      - NewPost --> Create Post
       - Post(multiple)
       - News
   - Account Page

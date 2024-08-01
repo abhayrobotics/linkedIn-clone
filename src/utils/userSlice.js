@@ -5,7 +5,7 @@ import { act } from "react";
 const userSlice = createSlice({
     name:"user",
     initialState:{
-        userName:null,
+        userName:"Mr Xaviours",
         email:null,
         errorMessage:null,
         imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4"
