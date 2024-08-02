@@ -249,6 +249,11 @@ export default Body;
     export default App;
     ```
 
+
+## Firebase Firestore
+
+- npm install firebase-admin --save
+
 ## standard
 
 - px-2 py-3 my-2

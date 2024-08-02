@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { act } from "react";
+
 
 
 const userSlice = createSlice({
@@ -8,7 +8,8 @@ const userSlice = createSlice({
         userName:"Mr Xaviours",
         email:null,
         errorMessage:null,
-        imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4"
+        imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4",
+        postOpen:true
     },
     reducers:{
         addUserName:(state,action)=>{
@@ -19,9 +20,12 @@ const userSlice = createSlice({
         },
         addErrorMessage:(state,action)=>{
             state.errorMessage =action.payload;
+        },
+        togglePostShow:(state)=>{
+            state.postOpen =!state.postOpen;
         }
     }
 })
 
-export const {addUserName,addUserEmail,addErrorMessage} = userSlice.actions;
+export const {addUserName,addUserEmail,addErrorMessage,togglePostShow} = userSlice.actions;
 export default userSlice.reducer;

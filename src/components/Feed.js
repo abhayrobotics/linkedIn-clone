@@ -4,12 +4,15 @@ import NewPost from "./NewPost";
 import Post from "./Post";
 import News from "./News";
 import CreatePost from "./CreatePost";
+import { useSelector } from "react-redux";
 
 
 const Feed = () => {
+
+  const togglePostShow =useSelector(store=>store?.user?.postOpen)
   return (
     <div>
-      <CreatePost />
+      {togglePostShow && <CreatePost />}
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 " >
         <div className=" flex justify-center flex-wrap flex-col sm:flex-row  w-4/6 ">
