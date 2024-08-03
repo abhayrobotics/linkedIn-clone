@@ -5,7 +5,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import SendIcon from '@mui/icons-material/Send';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Post = () => {
+const Post = ({postData,name}) => {
   const UserData = useSelector((store) => store.user);
 
   return (
@@ -16,7 +16,7 @@ const Post = () => {
         <div className="flex">
           <img src={UserData?.imageURL} className="w-12 rounded-full" />
           <div>
-            <div className="px-2 text-sm font-semibold">{UserData.userName}</div>
+            <div className="px-2 text-sm font-semibold">{name}</div>
             <div className="px-2 text-xs text-slate-500"> Frontend Developer | React | JavaScript | Learning DSA</div>
           </div>
         </div>
@@ -24,8 +24,7 @@ const Post = () => {
       </div>
       
       {/* ***********************************Post */}
-<div className="text-sm py-2">As you know that consistency is most difficult thing in completing DSA. And we make sure that everyone finish DSA with javascript course as a challenging mission in next 35 days. Course starts from 2nd August and we will soon stop admission just like last batch. Course is in Hindi and covers DSA, leetcode, machine coding, behaviour round, and bits of system design too. If you are interested use code YOUTUBE10 and get 10% discount.
-</div>
+<div className="text-sm py-2">{postData}</div>
       {/* *****************************Like comment share */}
       <hr className="my-2"/>
       <div className="pb-4 px-4 flex justify-between cursor-pointer">

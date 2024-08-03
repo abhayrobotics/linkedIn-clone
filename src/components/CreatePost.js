@@ -3,34 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { togglePostShow } from "../utils/userSlice";
 import { collection, getDocs, addDoc,doc,setDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
+import { useRef } from "react";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
-
+  const postText =useRef();
   const UserData = useSelector((store) => store.user);
   //   console.log(UserData.userName);
-
+  
   //   linking thepost to firebase store
-
+  
   const handlePost = async () => {
-    console.log("check");
-
-    // Read data from cloud
-
-    const querySnapshot = await getDocs(collection(db, "Posts"));
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data().post}`);
-    });
+    console.log(postText.current.value);
+    
+    // close the post
+        dispatch(togglePostShow());
+   
 
     // add new  data to cloud
-    // try {
-    //   const docRef = await addDoc(collection(db, "Posts"), {
-    //     post: "New data added",
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (e) {
-    //   console.error("Error adding document: ", e);
-    // }
+    try {
+      const date1 = new Date();
+      const docRef = await addDoc(collection(db, "Posts"), {
+        post: postText.current.value,
+        date: date1,
+        username: UserData.userName,
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
 
    
   };
@@ -60,7 +61,7 @@ const CreatePost = () => {
           {/* ************************* Post content */}
           <div>
             <textarea
-              className="p-2 w-full h-[48svh] border-none outline-none resize-none px-3 py-3 text-lg"
+              ref={postText} className="p-2 w-full h-[48svh] border-none outline-none resize-none px-3 py-3 text-lg"
               type="text"
               placeholder="What do you want to post ?"
             />
