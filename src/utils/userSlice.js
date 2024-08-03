@@ -5,7 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
     name:"user",
     initialState:{
-        userName:"Mr Xaviours",
+        userName:"My Account",
         email:null,
         errorMessage:null,
         imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4",

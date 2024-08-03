@@ -24,10 +24,15 @@ const Feed = () => {
     const querySnapshot = await getDocs(collection(db, "Posts"));
 
     querySnapshot.forEach((doc) => {
+      
       // console.log(`${doc.id} => ${doc.data().post}`);
-      dataArray.push([doc.id,doc.data().post,doc.data().username]);
-      dataArray.reverse();
+      dataArray.push([doc.id,doc.data().post,doc.data().username,doc.data().date]);
+
+      // sorting data based on date
+      dataArray.sort((a, b) => a[3] - b[3]);
+      dataArray.reverse()
     });
+    console.log(dataArray)
     setData1(dataArray);
     console.log(dataToShow)
   };
