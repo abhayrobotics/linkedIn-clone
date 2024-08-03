@@ -67,7 +67,7 @@ const Feed = () => {
               })
             }
           </div>
-          <News className="w-2/12" />
+          <News className="min-w-2/12" />
           {/* <News className="w-1/4" /> */}
         </div>
       </div>
