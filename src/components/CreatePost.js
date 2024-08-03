@@ -27,6 +27,9 @@ const CreatePost = () => {
         post: postText.current.value,
         date: date1,
         username: UserData.userName,
+        likeCount:0,
+        likeFlag:false,
+        Comment:[],
       });
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {

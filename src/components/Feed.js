@@ -13,28 +13,39 @@ import { useEffect, useState } from "react";
 const Feed = () => {
   const togglePostShow = useSelector((store) => store?.user?.postOpen);
   const [dataToShow, setData1] = useState([]);
+  const [dataLength, setDatalength] = useState([]);
 
   useEffect(() => {
-    previousPost();
+   
+      previousPost();
+  
+    console.log(dataToShow.length)
   }, []);
 
+  // Read data from cloud
   const previousPost = async () => {
-    // Read data from cloud
     const dataArray = [];
     const querySnapshot = await getDocs(collection(db, "Posts"));
 
     querySnapshot.forEach((doc) => {
       
-      // console.log(`${doc.id} => ${doc.data().post}`);
-      dataArray.push([doc.id,doc.data().post,doc.data().username,doc.data().date]);
+      dataArray.push([
+        doc.id,
+        doc.data().post,
+        doc.data().username,
+        doc.data().date,
+        doc.data().likeCount,
+        doc.data().likeFlag,
+      ]);
 
-      // sorting data based on date
+      // sorting data based on date, then latest first
       dataArray.sort((a, b) => a[3] - b[3]);
-      dataArray.reverse()
+      dataArray.reverse();
+      setDatalength(dataArray)
     });
-    console.log(dataArray)
+    console.log(dataArray);
     setData1(dataArray);
-    console.log(dataToShow)
+    // console.log(dataToShow);
   };
 
   return (
@@ -48,10 +59,13 @@ const Feed = () => {
             <NewPost />
             <hr className="mx-1 my-2 border-1 border-slate-500" />
 
-            {// post items 
-            dataToShow?.map((data) => {
-              return <Post postData={data[1]} name={data[2]} key={data[0]} />;
-            })}
+            {
+              // post items
+              dataToShow?.map((data) => {
+                return <Post  key={data[0]}  postData={data}  />;
+                // return <Post  key={data[0]}  postData={data[1]} name={data[2]} id={data[0]}  />;
+              })
+            }
           </div>
           <News className="w-1/4" />
         </div>
