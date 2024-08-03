@@ -45,7 +45,7 @@ const CreatePost = () => {
   };
 
   return (
-    <div className="absolute w-svw bg-black bg-opacity-40  h-svh">
+    <div className="absolute w-svw bg-black bg-opacity-40 z-20 h-svh">
       <div className=" absolute left-1/2 -translate-x-1/2 my-10 w-[50svw] min-h-[500px] h-[60svh] border bg-white rounded-lg ">
         <div>
           {/* ******************************** User Name */}

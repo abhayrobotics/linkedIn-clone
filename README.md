@@ -28,11 +28,16 @@
 - Login
 - feed
   - Header
-  - Profile
-  - NewPost --> Create Post
+  - Profile(z-10)
+  - NewPost --> Create Post(z-20)
   - Post(multiple)
   - News
 - Account Page
+
+## Bug
+- not rerender on new post arrival
+- like button not updated.
+
 
 # STEP BY STEP GUIDE
 

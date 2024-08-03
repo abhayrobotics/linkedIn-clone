@@ -17,7 +17,7 @@ import {
 const Post = ({ postData }) => {
   const [id, post, username, date, likeCount, likeFlag] = postData;
   const UserData = useSelector((store) => store.user);
-  console.log(post);
+  // console.log(post);
 
   const handleLike = async () => {
     // handle like of a post
@@ -30,7 +30,7 @@ const Post = ({ postData }) => {
   // console.table(likeCount,likeFlag)
 
   return (
-    <div className="m-1 p-2 pb-0 w-[500px] border border-slate-300  bg-white  rounded-lg ">
+    <div className="m-1 p-3 pb-0 w-[600px] border border-slate-300  bg-white  rounded-lg ">
       {/* ****************************** User Details */}
       <div className="flex justify-between">
         <div className="flex">

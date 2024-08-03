@@ -19,7 +19,7 @@ const Feed = () => {
    
       previousPost();
   
-    console.log(dataToShow.length)
+    // console.log(dataToShow.length)
   }, []);
 
   // Read data from cloud
@@ -43,7 +43,7 @@ const Feed = () => {
       dataArray.reverse();
       setDatalength(dataArray)
     });
-    console.log(dataArray);
+    // console.log(dataArray);
     setData1(dataArray);
     // console.log(dataToShow);
   };
@@ -53,8 +53,8 @@ const Feed = () => {
       {togglePostShow && <CreatePost />}
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 ">
-        <div className=" flex justify-center flex-wrap flex-col sm:flex-row  w-4/6 ">
-          <Profile className="w-1/4" />
+        <div className=" flex justify-center flex-wrap flex-col sm:flex-row  w-9/12 ">
+          <Profile className="w-2/12" />
           <div className="flex flex-col  ">
             <NewPost />
             <hr className="mx-1 my-2 border-1 border-slate-500" />
@@ -67,7 +67,8 @@ const Feed = () => {
               })
             }
           </div>
-          <News className="w-1/4" />
+          <News className="w-2/12" />
+          {/* <News className="w-1/4" /> */}
         </div>
       </div>
     </div>

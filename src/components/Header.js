@@ -15,7 +15,7 @@ const Header = () => {
     const userName = useSelector(store=>store.user.userName);
   return (
     <div className="flex justify-center">
-      <div className="flex justify-between max-w-7/12 w-4/6">
+      <div className="flex justify-between max-w-7/12 w-9/12">
         <div className="flex items-center py-2 px-5 text-mainColor ">
           <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />
           <SearchIcon sx={{ fontSize: 25 }} color="primary" />
