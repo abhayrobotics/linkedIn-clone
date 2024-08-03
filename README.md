@@ -7,7 +7,6 @@
 - Firebase Authentication
 - redux Toolkit
 
-
 ## Features to add
 
 - login page✅
@@ -15,30 +14,30 @@
 - firebase authentication✅
 - Header✅
 - icon in header + search functionality
-- create a post :like share comment , reply to a comment 
+- create a post :like share comment , reply to a comment
 - firebase cloudstore
 - search with gemini ai, post with ai
 - lazy loading
 - memoization
-- messaging 
+- messaging
 - multiple user signup handling
 - page for people to follow.
 
-
 ## File Structure
-  - Login 
-  - feed
-      - Header
-      - Profile
-      - NewPost --> Create Post
-      - Post(multiple)
-      - News
-  - Account Page
 
+- Login
+- feed
+  - Header
+  - Profile
+  - NewPost --> Create Post
+  - Post(multiple)
+  - News
+- Account Page
 
 # STEP BY STEP GUIDE
 
 ## React Setup
+
 - open terminal
   - cd linkedin
   - npx create-react-app .
@@ -125,7 +124,9 @@ export default Body;
         const app = initializeApp(firebaseConfig);
         export const auth = getAuth(app);
 
-     ```
+  ```
+
+  ```
 
 - in login.js for sign up
 
@@ -165,94 +166,158 @@ export default Body;
     };
     return (
       <>
-       <form className="flex flex-col"onSubmit={(e)=>e.preventDefault()}  >
-            <input
-              ref={email1}
-              className="px-2 py-3 my-2 border text-lg border-slate-400 rounded-md"
-              type="email"
-              placeholder="Email"
-            />
-            <input
+        <form className="flex flex-col" onSubmit={(e) => e.preventDefault()}>
+          <input
+            ref={email1}
+            className="px-2 py-3 my-2 border text-lg border-slate-400 rounded-md"
+            type="email"
+            placeholder="Email"
+          />
+          <input
             ref={password1}
-              className="px-2 py-3 my-2 border text-lg border-slate-400 rounded-md"
-              type="password"
-              placeholder="Password"
-            />
+            className="px-2 py-3 my-2 border text-lg border-slate-400 rounded-md"
+            type="password"
+            placeholder="Password"
+          />
 
-            <button  onClick={handleSignup} className="bg-mainColor hover:bg-maindark my-2 py-3 rounded-3xl text-white cursor-pointer font-semibold  ">
-              Sign in
-            </button>
-          </form>
+          <button
+            onClick={handleSignup}
+            className="bg-mainColor hover:bg-maindark my-2 py-3 rounded-3xl text-white cursor-pointer font-semibold  "
+          >
+            Sign in
+          </button>
+        </form>
       </>
     );
   };
   ```
 
 ## Redux Setup
--  install Redux and itds toolkit
-    - npm i react-redux
-    - npm i -D @reduxjs/toolkit 
+
+- install Redux and itds toolkit
+  - npm i react-redux
+  - npm i -D @reduxjs/toolkit
 - created redux using user slice
 
-    ```javascript
-        import { createSlice } from "@reduxjs/toolkit";
+  ```javascript
+      import { createSlice } from "@reduxjs/toolkit";
 
 
-        const userSlice = createSlice({
-        name:"user",
-        initialState:{
-            userName:null,
-            email:null
-        },
-        reducers:{
-            addUserName:(state,action)=>{
-                state.userName =action.payload;
-            },
-            addUserEmail:(state,action)=>{
-                state.email =action.payload;
-            }
-        }
-        })
+      const userSlice = createSlice({
+      name:"user",
+      initialState:{
+          userName:null,
+          email:null
+      },
+      reducers:{
+          addUserName:(state,action)=>{
+              state.userName =action.payload;
+          },
+          addUserEmail:(state,action)=>{
+              state.email =action.payload;
+          }
+      }
+      })
 
-        export {addUserName,addUserEmail} from userSlice.actions;
-        export default userSlice.reducer;
-    ```
--   create an appstore
+      export {addUserName,addUserEmail} from userSlice.actions;
+      export default userSlice.reducer;
+  ```
 
-    ```javascript
-    import  {configureStore} from "@reduxjs/toolkit"
-    import  userReducer  from "./userSlice";
+- create an appstore
 
-    const appStore = configureStore({
-        reducer:{
-            user:userReducer,
-        }
-    })
+  ````javascript
+  import  {configureStore} from "@reduxjs/toolkit"
+  import  userReducer  from "./userSlice";
 
-    export default appStore;```
+  const appStore = configureStore({
+      reducer:{
+          user:userReducer,
+      }
+  })
 
--   link the app store to our main app
-    ``` javascript
-    import Body from './components/Body';
-    import {Provider} from "react-redux"
-    import appStore from './utils/appStore';
+  export default appStore;```
 
-    function App() {
+  ````
+
+- link the app store to our main app
+
+  ```javascript
+  import Body from "./components/Body";
+  import { Provider } from "react-redux";
+  import appStore from "./utils/appStore";
+
+  function App() {
     return (
-        <Provider store={appStore}>
-
+      <Provider store={appStore}>
         <Body />
-        </Provider>
+      </Provider>
     );
-    }
+  }
 
-    export default App;
-    ```
-
+  export default App;
+  ```
 
 ## Firebase Firestore
 
-- npm install firebase-admin --save
+- Inside terminal
+  npm install firebase-admin --save
+
+- create a fireabase.js file
+
+```javascript
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+
+// TODO: Replace the following with your app's Firebase project configuration
+const firebaseConfig = {
+  FIREBASE_CONFIGURATION,
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Cloud Firestore and get a reference to the service and export to use in other compoenent
+export const db = getFirestore(app);
+```
+
+- open console of firebase database , create a database collection with DEMO case ,
+
+### Read the firesstore data
+
+calling an async function with
+
+```javascript
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../utils/firebase";
+
+// inside a component
+const handlePost = async () => {
+  console.log("check");
+
+  // reading data from cloud
+  const querySnapshot = await getDocs(collection(db, "Posts"));
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data().post}`);
+  });
+
+    // add new  data to cloud
+  try {
+    const docRef = await addDoc(collection(db, "Posts"), {
+      post: "Ada",
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
+
+   // Add a new document in collection "cities" with id =LA
+    await setDoc(doc(db, "Posts", "LA"), {
+      name: "Los Angeles",
+      state: "CA",
+      country: "USA",
+    });
+};
+```
 
 ## standard
 

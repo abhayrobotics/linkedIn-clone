@@ -5,11 +5,17 @@ import Post from "./Post";
 import News from "./News";
 import CreatePost from "./CreatePost";
 import { useSelector } from "react-redux";
+import app from "../utils/firebase";
+// import {db} from "../utils/firebase"
 
 
 const Feed = () => {
-
+  
   const togglePostShow =useSelector(store=>store?.user?.postOpen)
+  
+
+
+
   return (
     <div>
       {togglePostShow && <CreatePost />}

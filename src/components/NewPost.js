@@ -11,7 +11,7 @@ const NewPost = () => {
 
   const handleOpenPost =()=>{
     dispatch(togglePostShow())
-    console.log(togglePostShow())
+    
   }
 
   return (
@@ -19,7 +19,7 @@ const NewPost = () => {
       <div className="m-1 p-2 pb-0 w-[500px] border border-slate-300  bg-white  rounded-lg">
         <div className="flex">
           <img src={imgURL} className="w-12 rounded-full" />
-          <button onClick={handleOpenPost()} className="w-[100%] border border-slate-300 text-sm text-slate-600 font-semibold text-left hover:bg-feedColor py-2 px-6 rounded-full mx-2">
+          <button onClick={handleOpenPost} className="w-[100%] border border-slate-300 text-sm text-slate-600 font-semibold text-left hover:bg-feedColor py-2 px-6 rounded-full mx-2">
             Start a post, try writing with AI
           </button>
         </div>

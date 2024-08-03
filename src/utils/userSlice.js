@@ -9,7 +9,7 @@ const userSlice = createSlice({
         email:null,
         errorMessage:null,
         imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4",
-        postOpen:true
+        postOpen:false,
     },
     reducers:{
         addUserName:(state,action)=>{
@@ -22,6 +22,7 @@ const userSlice = createSlice({
             state.errorMessage =action.payload;
         },
         togglePostShow:(state)=>{
+            console.log(state.postOpen)
             state.postOpen =!state.postOpen;
         }
     }

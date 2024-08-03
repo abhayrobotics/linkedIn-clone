@@ -1,21 +1,43 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePostShow } from "../utils/userSlice";
+import { collection, getDocs, addDoc,doc,setDoc } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
 const CreatePost = () => {
-  
-    const dispatch = useDispatch();
-  
-    const UserData = useSelector((store) => store.user);
-//   console.log(UserData.userName);
+  const dispatch = useDispatch();
 
-//   linking thepost to firebase store
+  const UserData = useSelector((store) => store.user);
+  //   console.log(UserData.userName);
 
-  const handlePost = () => {};
+  //   linking thepost to firebase store
 
-// close the post
-  const handleClosePost =()=>{
-        dispatch(togglePostShow())
+  const handlePost = async () => {
+    console.log("check");
+
+    // Read data from cloud
+
+    const querySnapshot = await getDocs(collection(db, "Posts"));
+    querySnapshot.forEach((doc) => {
+      console.log(`${doc.id} => ${doc.data().post}`);
+    });
+
+    // add new  data to cloud
+    // try {
+    //   const docRef = await addDoc(collection(db, "Posts"), {
+    //     post: "New data added",
+    //   });
+    //   console.log("Document written with ID: ", docRef.id);
+    // } catch (e) {
+    //   console.error("Error adding document: ", e);
+    // }
+
+   
+  };
+
+  // close the post
+  const handleClosePost = () => {
+    dispatch(togglePostShow());
   };
 
   return (
@@ -30,7 +52,10 @@ const CreatePost = () => {
                 {UserData.userName}
               </div>
             </div>
-            <CloseIcon onClick={handleClosePost}/>
+            <CloseIcon
+              onClick={handleClosePost}
+              className=" cursor-pointer hover:bg-slate-300 p-0.5 rounded-full"
+            />
           </div>
           {/* ************************* Post content */}
           <div>
@@ -40,7 +65,7 @@ const CreatePost = () => {
               placeholder="What do you want to post ?"
             />
           </div>
-          <hr className="my-2"/>
+          <hr className="my-2" />
           <div className="flex justify-end  mx-3 " onClick={handlePost}>
             <button className="bg-mainColor px-5 py-1 rounded-2xl text-white text-md font-semibold">
               Post
