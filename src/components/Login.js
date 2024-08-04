@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addErrorMessage, addUserEmail, addUserName, checkLoggedIn } from "../utils/userSlice";
+import { addErrorMessage, addUserEmail, addUserName, addUserphoto, checkLoggedIn } from "../utils/userSlice";
 import { addDoc, collection } from "firebase/firestore";
 import banner from "../assets/banner.png"
 
@@ -92,7 +92,7 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           // ...
-          console.log("signup sucess");
+          console.log("signup sucess",email1.current.value.split("@")[0]);
           // addding user data
           dispatch(addUserEmail(email1.current.value));
           dispatch(addUserName(email1.current.value.split("@")[0]));
@@ -154,6 +154,7 @@ const Login = () => {
         console.log(user,auth);
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(user.displayName));
+        dispatch(addUserphoto(user.photoURL));
         dispatch(checkLoggedIn(true));
         createUserDatabase()
         navigate("/feed")

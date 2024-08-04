@@ -20,6 +20,9 @@ const userSlice = createSlice({
         addUserEmail:(state,action)=>{
             state.email =action.payload;
         },
+        addUserphoto:(state,action)=>{
+            state.imageURL =action.payload;
+        },
         addErrorMessage:(state,action)=>{
             state.errorMessage =action.payload;
         },
@@ -37,5 +40,5 @@ const userSlice = createSlice({
     }
 })
 
-export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,checkLoggedIn,updatePageLocation} = userSlice.actions;
+export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,addUserphoto,checkLoggedIn,updatePageLocation} = userSlice.actions;
 export default userSlice.reducer;

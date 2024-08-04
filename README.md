@@ -47,6 +47,7 @@
 - like button not updated.
 - navigate using if loggdin ?✅
     - authentication have tobe checked with firebase server  as  redux variable gets null on refresh
+- profile photo change on refresh bug
 
 
 ## standard
@@ -347,4 +348,7 @@ const handlePost = async () => {
 ## navigating using pageLocation variable , updatepageLocation rerducer in user Slice redux
 
 ## created a network page with my network and people o know
+
+## created a userdatabase on signup using createUserDatabase fucntion in login.js
+
 

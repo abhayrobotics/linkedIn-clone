@@ -12,12 +12,12 @@ const News = () => {
     const data = await fetch(newsURL + process.env.REACT_APP_NEWS_API_KEY);
     const json = await data.json();
     // console.log(json);
-    console.log(json.articles.slice(0, 10));
+    // console.log(json.articles.slice(0, 10));
     setnewsData(json.articles.slice(0, 10));
   };
   
   const now= new Date();
-console.log(now.getDate() - newsData[6]?.publishedAt?.split("T")[0]?.split("-")[2]);
+// console.log(now.getDate() - newsData[6]?.publishedAt?.split("T")[0]?.split("-")[2]);
   return (
     <div className=" max-w-[250px] min-w-16 m-1   h-fit bg-white  rounded-lg">
       <div>
