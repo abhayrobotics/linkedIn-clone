@@ -30,7 +30,7 @@ console.log(now.getDate() - newsData[6]?.publishedAt?.split("T")[0]?.split("-")[
       </div>
       {newsData?.map((item) => {
         return (
-          <div key={item.title}>
+          <div key={item.title} className="hover:bg-slate-200 my-2">
             <Link to={item.url}>
               <h1 className="text-sm font-semibold px-3 text-slate-700 mt-2 mb-1 line-clamp-2">
                 {item.title.split("- ")[0]}

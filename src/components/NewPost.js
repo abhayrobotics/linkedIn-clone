@@ -30,7 +30,7 @@ const NewPost = () => {
           </div>
           <div className="flex items-center cursor-pointer  rounded-lg px-6 py-2 hover:bg-feedColor">
           <WhatshotIcon sx={{ color: "#ffa726"}} />
-            <p className="px-2 text-sm">Contribute</p>
+            <p className="px-2 text-sm">Job</p>
 
           </div>
           <div className="flex items-center cursor-pointer   rounded-lg px-6 py-2 hover:bg-feedColor">

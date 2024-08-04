@@ -9,9 +9,9 @@ import {
   signInWithPopup,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addErrorMessage, addUserEmail, addUserName } from "../utils/userSlice";
+import { addErrorMessage, addUserEmail, addUserName, checkLoggedIn } from "../utils/userSlice";
 
 const Login = () => {
   const [signIn, setSignIn] = useState(true);
@@ -21,10 +21,35 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const errorMes = useSelector((store)=>store.user.errorMessage)
-  
+  const userData = useSelector(store=>store.user)
+
+
+  // handles chnage in auth state
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+       
+        //   dispacth an action using reducer fn()
+        dispatch(addUserEmail(user.email));
+        dispatch(addUserName(user.displayName));
+        dispatch(checkLoggedIn(true));
+
+        // navigating to feed page
+        navigate("/feed");
+      } else {
+        // User is signed out
+        dispatch(checkLoggedIn(false));
+        navigate("/");
+      }
+    });
+
+    // unsubscribe when the component unmounts
+    return () => unSubscribe();
+  }, [dispatch, navigate]);
+
 
   // toggle sign in
-  const handleSigIn = () => {
+  const handleSignIn = () => {
     setSignIn(!signIn);
   };
 
@@ -32,7 +57,7 @@ const Login = () => {
   const handleSignup = () => {
     // console.log(email1.current.value, password1.current.value);
 
-    // if false then sign UP
+        // if false then sign UP
     if (!signIn) {
       createUserWithEmailAndPassword(
         auth,
@@ -46,6 +71,7 @@ const Login = () => {
           // addding user data
           dispatch(addUserEmail(email1.current.value));
           dispatch(addUserName(email1.current.value.split("@")[0]));
+          dispatch(checkLoggedIn(true))
 
           // nagivation if sucess
           navigate("/feed");
@@ -54,7 +80,7 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorMessage);
-
+        
           dispatch(addErrorMessage(errorMessage));
           // ..
         });
@@ -74,15 +100,19 @@ const Login = () => {
           // ...
           dispatch(addUserEmail(email1.current.value));
           dispatch(addUserName(email1.current.value.split("@")[0]));
+          dispatch(checkLoggedIn(true))
           navigate("/feed");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
-
+          
           dispatch(addErrorMessage(errorMessage));
         });
     }
+
+    
+
   };
   // *********************** sign in via google
   const googleSignup = () => {
@@ -95,10 +125,10 @@ const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
+        console.log(user,auth);
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(user.displayName));
-
+        dispatch(checkLoggedIn(true));
         navigate("/feed")
       })
       .catch((error) => {
@@ -179,7 +209,7 @@ const Login = () => {
           <div className="ml-2 my-2 text-center">
             {signIn ? "New to LinkedIn ?" : "Already a user ?"}
             <span
-              onClick={handleSigIn}
+              onClick={handleSignIn}
               className="ml-2 text-mainColor cursor-pointer  px-3 py-1  hover:bg-maindark hover:text-white  rounded-xl font-semibold"
             >
               {signIn ? "Join now" : "Sign In"}

@@ -9,11 +9,21 @@ import { useSelector } from "react-redux";
 import { db } from "../utils/firebase";
 import { getDocs, collection } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
+  const navigate = useNavigate()
+  const userData = useSelector(store=> store.user)
   const togglePostShow = useSelector((store) => store?.user?.postOpen);
+ 
   const [dataToShow, setData1] = useState([]);
   const [dataLength, setDatalength] = useState([]);
+
+  // navigating if not logged in
+  if(!userData.loggedIn){
+    console.log(" trigger 1")
+    // navigate("/");
+  }
 
   useEffect(() => {
    

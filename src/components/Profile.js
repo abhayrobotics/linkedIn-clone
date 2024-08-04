@@ -9,9 +9,9 @@ const Profile = () => {
   return (
     <div className=" m-1  max-w-screen sm:max-w-[250px]  min-w-16 border border-slate-300 h-56 bg-white  rounded-lg overflow-hidden">
       <div className="relative">
-        <img src={banner} alt="banner" className="absolute top-0 "/>
+        <img src={banner} alt="banner" className="absolute top-0 " />
         <div className=" relative z-10 flex flex-col items-center py-3   ">
-          <img src={UserData?.imageURL} className="w-16 rounded-full mt-6" />
+          <img src={UserData?.imageURL} className="w-16 rounded-full mt-6"alt="profile" />
           <div>
             <div className="px-2 text-sm font-semibold text-center">
               <Link to="/account" className="hover:underline hover:font-semibold">{UserData.userName} </Link>

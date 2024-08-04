@@ -5,7 +5,10 @@
 - tailwind
 - Material UI icons
 - Firebase Authentication
+- firebase firestore
+- news API
 - redux Toolkit
+
 
 ## Features to add
 
@@ -14,30 +17,35 @@
 - firebase authentication✅
 - Header✅
 - icon in header + search functionality
-- create a post :like share comment , reply to a comment
-- firebase cloudstore
+- create a post :✅
+- like share comment , reply to a comment (nested)
+- firebase firestore✅
 - search with gemini ai, post with ai
 - lazy loading
 - memoization
 - messaging
-- multiple user signup handling
+- multiple user signup handling ✅
 - page for people to follow.
 
 ## File Structure
 
 - Login
 - feed
-  - Header
+  - Header(z-30)
   - Profile(z-10)
   - NewPost --> Create Post(z-20)
   - Post(multiple)
   - News
 - Account Page
+- Network Page
 
 ## Bug
 - not rerender on new post arrival
 - like button not updated.
 
+## standard
+
+- px-2 py-3 my-2
 
 # STEP BY STEP GUIDE
 
@@ -324,6 +332,4 @@ const handlePost = async () => {
 };
 ```
 
-## standard
 
-- px-2 py-3 my-2
