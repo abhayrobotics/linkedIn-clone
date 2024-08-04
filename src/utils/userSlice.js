@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import banner from "../assets/banner.png"
 
 
 const userSlice = createSlice({
@@ -7,8 +7,8 @@ const userSlice = createSlice({
     initialState:{
         userName:"My Account",
         email:null,
-        errorMessage:null,
         imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4",
+        errorMessage:null,
         loggedIn:false,
         postOpen:false,
         pageLocation:"/feed",

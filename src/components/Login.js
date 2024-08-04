@@ -1,7 +1,7 @@
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
-import { auth } from "../utils/firebase";
+import { auth, db } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -12,6 +12,8 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addErrorMessage, addUserEmail, addUserName, checkLoggedIn } from "../utils/userSlice";
+import { addDoc, collection } from "firebase/firestore";
+import banner from "../assets/banner.png"
 
 const Login = () => {
   const [signIn, setSignIn] = useState(true);
@@ -53,6 +55,29 @@ const Login = () => {
     setSignIn(!signIn);
   };
 
+  // ************************* creating user database on signup
+  const createUserDatabase = async()=>{
+     try{
+       const docRef = await addDoc(collection(db,"users"),{
+         name1: userData.userName,
+         bio:"Cofounder",
+         email1:userData.email,
+         image:userData.imageURL,
+         friends:[],
+         banner:banner,
+         location:null,
+         posts:[],
+         
+        })
+        console.log("created user database");
+     }
+     catch(e){
+      console.log(e)
+
+     }
+  }
+  
+
   // ********************sign In via email password
   const handleSignup = () => {
     // console.log(email1.current.value, password1.current.value);
@@ -71,7 +96,8 @@ const Login = () => {
           // addding user data
           dispatch(addUserEmail(email1.current.value));
           dispatch(addUserName(email1.current.value.split("@")[0]));
-          dispatch(checkLoggedIn(true))
+          dispatch(checkLoggedIn(true));
+          createUserDatabase()
 
           // nagivation if sucess
           navigate("/feed");
@@ -129,6 +155,7 @@ const Login = () => {
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(user.displayName));
         dispatch(checkLoggedIn(true));
+        createUserDatabase()
         navigate("/feed")
       })
       .catch((error) => {

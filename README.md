@@ -20,6 +20,7 @@
 - create a post :✅
 - like share comment , reply to a comment (nested)
 - firebase firestore✅
+- network page with people to connect
 - search with gemini ai, post with ai
 - lazy loading
 - memoization
@@ -32,12 +33,14 @@
 - Login
 - feed
   - Header(z-20)
-  - Profile(z-10)
+  - Profile -->img(z-10)
   - NewPost --> Create Post(z-30)
   - Post(multiple)
   - News
 - Account Page
 - Network Page
+  - Profile
+  - PeopleToknow
 
 ## Bug
 - not rerender on new post arrival
@@ -342,4 +345,6 @@ const handlePost = async () => {
 ## implemented news API and its component
 
 ## navigating using pageLocation variable , updatepageLocation rerducer in user Slice redux
+
+## created a network page with my network and people o know
 
