@@ -31,9 +31,9 @@
 
 - Login
 - feed
-  - Header(z-30)
+  - Header(z-20)
   - Profile(z-10)
-  - NewPost --> Create Post(z-20)
+  - NewPost --> Create Post(z-30)
   - Post(multiple)
   - News
 - Account Page
@@ -42,6 +42,9 @@
 ## Bug
 - not rerender on new post arrival
 - like button not updated.
+- navigate using if loggdin ?✅
+    - authentication have tobe checked with firebase server  as  redux variable gets null on refresh
+
 
 ## standard
 
@@ -332,4 +335,11 @@ const handlePost = async () => {
 };
 ```
 
+## navigate using firebase onchangeauth method
+
+## created profile secton 
+
+## implemented news API and its component
+
+## navigating using pageLocation variable , updatepageLocation rerducer in user Slice redux
 

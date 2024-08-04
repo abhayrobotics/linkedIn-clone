@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SearchIcon from "@mui/icons-material/Search";
 import HomeIcon from "@mui/icons-material/Home";
@@ -11,7 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { addUserEmail, addUserName, checkLoggedIn } from "../utils/userSlice";
+import { addUserEmail, addUserName, checkLoggedIn, updatePageLocation } from "../utils/userSlice";
 
 
 const Header = () => {
@@ -21,7 +21,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   
-  // handles chnage in auth state
+  // handles chnage in auth state, same code in Login
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -32,7 +32,7 @@ const Header = () => {
         dispatch(checkLoggedIn(true));
 
         // navigating to feed page
-        navigate("/feed");
+        navigate(userData.pageLocation);
       } else {
         // User is signed out
         dispatch(checkLoggedIn(false));
@@ -59,7 +59,7 @@ const Header = () => {
 
 
   return (
-    <div className="sticky top-0 left-0 flex justify-center bg-white z-30">
+    <div className="sticky top-0 left-0 flex justify-center bg-white z-20">
       <div className="flex justify-between max-w-7/12 w-9/12">
         <div className="flex items-center py-2 px-5 text-mainColor ">
           <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />
@@ -67,21 +67,25 @@ const Header = () => {
         </div>
         {/* *********************icons**************** */}
         <div className="flex items-center ">
-          <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-            <HomeIcon
-              className="text-slate-400 hover:text-black "
-              sx={{ fontSize: 25 }}
-            />
-           <p className=" text-xs  text-slate-600 scroll ">Home</p>
-          </div>
+          <Link to="/feed" onClick={()=>dispatch(updatePageLocation("/feed"))}>
+            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+              <HomeIcon
+                className="text-slate-400 hover:text-black "
+                sx={{ fontSize: 25 }}
+              />
+            <p className=" text-xs  text-slate-600 scroll ">Home</p>
+            </div>
+          </Link>
 
-          <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-            <PeopleIcon
-              className="text-slate-400 hover:text-black "
-              sx={{ fontSize: 25 }}
-            />
-           <p className=" text-xs  text-slate-600 scroll text-nowrap ">My Network</p>
-          </div>
+          <Link to="/network" onClick={()=>dispatch(updatePageLocation("/network"))}>
+            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+              <PeopleIcon
+                className="text-slate-400 hover:text-black "
+                sx={{ fontSize: 25 }}
+              />
+            <p className=" text-xs  text-slate-600 scroll text-nowrap ">My Network</p>
+            </div>
+          </Link>
 
           <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
             <WorkIcon

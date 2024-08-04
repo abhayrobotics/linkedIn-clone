@@ -3,6 +3,7 @@ import Login from "./Login";
 import Feed from "./Feed";
 
 import AccountPage from "./AccountPage";
+import Network from "./Network";
 
 
 
@@ -19,6 +20,11 @@ const Body = () => {
     {
         path:"/account",
         element:<AccountPage/>
+
+    },
+    {
+        path:"/network",
+        element:<Network/>
 
     }
   ]);

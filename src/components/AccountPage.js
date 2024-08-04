@@ -1,8 +1,12 @@
 import React from 'react'
+import Header from './Header'
 
 const AccountPage = () => {
   return (
-    <div>AccountPage</div>
+    <div>
+      <Header />
+      Account page
+    </div>
   )
 }
 

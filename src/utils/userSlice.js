@@ -11,6 +11,7 @@ const userSlice = createSlice({
         imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4",
         loggedIn:false,
         postOpen:false,
+        pageLocation:"/feed",
     },
     reducers:{
         addUserName:(state,action)=>{
@@ -29,9 +30,12 @@ const userSlice = createSlice({
         checkLoggedIn:(state,action)=>{
             console.log(state.loggedIn)
             state.loggedIn =action.payload;
+        },
+        updatePageLocation:(state,action)=>{
+            state.pageLocation =action.payload;
         }
     }
 })
 
-export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,checkLoggedIn} = userSlice.actions;
+export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,checkLoggedIn,updatePageLocation} = userSlice.actions;
 export default userSlice.reducer;

@@ -64,7 +64,7 @@ const Feed = () => {
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 ">
         <div className=" flex justify-center flex-wrap flex-col sm:flex-row  w-9/12 ">
-          <Profile className="w-2/12" />
+          <Profile className="w-2/12" mainProfile={true}/>
           <div className="flex flex-col  ">
             <NewPost />
             <hr className="mx-1 my-2 border-1 border-slate-500" />

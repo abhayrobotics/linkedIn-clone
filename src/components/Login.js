@@ -24,7 +24,7 @@ const Login = () => {
   const userData = useSelector(store=>store.user)
 
 
-  // handles chnage in auth state
+  //**************************** */ handles chnage in auth state
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -35,7 +35,7 @@ const Login = () => {
         dispatch(checkLoggedIn(true));
 
         // navigating to feed page
-        navigate("/feed");
+        navigate(userData.pageLocation);
       } else {
         // User is signed out
         dispatch(checkLoggedIn(false));
