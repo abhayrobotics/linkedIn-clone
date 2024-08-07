@@ -14,7 +14,7 @@ import { auth } from "../utils/firebase";
 import { addUserEmail, addUserName, checkLoggedIn, updatePageLocation } from "../utils/userSlice";
 
 
-const Header = () => {
+const Header = ({show}) => {
 
   const userName = useSelector(store=>store.user.userName);
   const userData = useSelector(store=>store.user);
@@ -59,7 +59,7 @@ const Header = () => {
 
 
   return (
-    <div className="sticky top-0 left-0 flex justify-center bg-white z-20">
+    <div className={`${show} sticky top-0 left-0 flex justify-center bg-white z-20`}>
       <div className="flex justify-between max-w-7/12 w-9/12">
         <div className="flex items-center py-2 px-5 text-mainColor ">
           <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />

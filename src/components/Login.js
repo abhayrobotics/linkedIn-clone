@@ -1,6 +1,7 @@
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
+import Header from "./Header";
 import { auth, db } from "../utils/firebase";
 import {
   createUserWithEmailAndPassword,
@@ -25,29 +26,6 @@ const Login = () => {
   const errorMes = useSelector((store)=>store.user.errorMessage)
   const userData = useSelector(store=>store.user)
 
-
-  //**************************** */ handles chnage in auth state
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-       
-        //   dispacth an action using reducer fn()
-        dispatch(addUserEmail(user.email));
-        dispatch(addUserName(user.displayName));
-        dispatch(checkLoggedIn(true));
-
-        // navigating to feed page
-        navigate(userData.pageLocation);
-      } else {
-        // User is signed out
-        dispatch(checkLoggedIn(false));
-        navigate("/");
-      }
-    });
-
-    // unsubscribe when the component unmounts
-    return () => unSubscribe();
-  }, [dispatch, navigate]);
 
 
   // toggle sign in
@@ -78,7 +56,7 @@ const Login = () => {
   }
   
 
-  // ********************sign In via email password
+  // ********************sign Up via email password
   const handleSignup = () => {
     // console.log(email1.current.value, password1.current.value);
 
@@ -92,10 +70,10 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           // ...
-          console.log("signup sucess",email1.current.value.split("@")[0]);
+          console.log("signup sucess",email1?.current?.value?.split("@")[0]);
           // addding user data
-          dispatch(addUserEmail(email1.current.value));
-          dispatch(addUserName(email1.current.value.split("@")[0]));
+          dispatch(addUserEmail(user?.email));
+          dispatch(addUserName(user?.email?.split("@")[0]));
           dispatch(checkLoggedIn(true));
           createUserDatabase()
 
@@ -124,8 +102,8 @@ const Login = () => {
           const user = userCredential.user;
           console.log("signIN success");
           // ...
-          dispatch(addUserEmail(email1.current.value));
-          dispatch(addUserName(email1.current.value.split("@")[0]));
+          dispatch(addUserEmail(user.email));
+          dispatch(addUserName(user.email.split("@")[0]));
           dispatch(checkLoggedIn(true))
           navigate("/feed");
         })
@@ -175,8 +153,9 @@ const Login = () => {
 
   return (
     <div className="h-[100svh]">
+      <Header show={"hidden"} />
       {/* ******************** logo*********** */}
-      <div className="flex items-center py-5 px-5 text-mainColor text-2xl font-bold">
+      <div className="flex items-center  py-5 px-5 text-mainColor text-2xl font-bold">
         <h2>Linked</h2>
         <LinkedInIcon sx={{ fontSize: 32 }} color="primary" />
       </div>
