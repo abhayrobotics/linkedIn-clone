@@ -5,6 +5,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 import { db } from "../utils/firebase";
+
 import {
   addDoc,
   collection,
@@ -13,6 +14,7 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
+import { useEffect } from "react";
 
 const Post = ({ postData }) => {
   const [id, post, username, date, likeCount, likeFlag] = postData;
@@ -22,12 +24,14 @@ const Post = ({ postData }) => {
   const handleLike = async () => {
     // handle like of a post
     // const oldLikeCount =
+    
     await updateDoc(doc(db, "Posts", id), {
-      likeCount: likeCount + likeFlag?1:0,
+      likeCount: likeFlag===false?likeCount+ 1:likeCount-1,
       likeFlag: !likeFlag,
     });
   };
   // console.table(likeCount,likeFlag)
+  
 
   return (
     <div className="m-1 p-3 pb-0 w-[600px] border border-slate-300  bg-white  rounded-lg ">
@@ -60,6 +64,7 @@ const Post = ({ postData }) => {
           <p className="px-2 text-sm" onClick={handleLike}>
             Like
           </p>
+          {likeCount==null?null:likeCount}
         </div>
         <div className="flex items-center cursor-pointer  rounded-lg px-6 py-2 hover:bg-feedColor">
           <ChatIcon sx={{ color: "slategray" }} />

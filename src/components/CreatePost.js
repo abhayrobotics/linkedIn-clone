@@ -4,6 +4,7 @@ import { togglePostShow } from "../utils/userSlice";
 import { collection, getDocs, addDoc,doc,setDoc } from "firebase/firestore";
 import { db } from "../utils/firebase";
 import { useRef } from "react";
+import { PreviousPost } from "./Feed";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const CreatePost = () => {
         Comment:[],
       });
       console.log("Document written with ID: ", docRef.id);
+      
     } catch (e) {
       console.error("Error adding document: ", e);
     }
