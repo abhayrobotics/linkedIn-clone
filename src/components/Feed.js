@@ -11,6 +11,7 @@ import { getDocs, collection, onSnapshot, doc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../utils/postSlice";
+import Messenger from "./Messenger";
 
 const Feed = () => {
   const navigate = useNavigate();
@@ -94,6 +95,7 @@ const Feed = () => {
           {/* <News className="w-1/4" /> */}
         </div>
       </div>
+      <Messenger />
     </div>
   );
 };

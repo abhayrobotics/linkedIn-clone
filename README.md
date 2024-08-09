@@ -352,3 +352,4 @@ const handlePost = async () => {
 ## created a userdatabase on signup using createUserDatabase fucntion in login.js
 
 
+npm install react-firebase-hooks
