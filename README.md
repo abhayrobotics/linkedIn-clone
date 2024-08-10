@@ -26,6 +26,7 @@
 - memoization
 - messaging✅
 - multiple user signup handling ✅
+    - check unique user and adding to database
 - page for people to follow.
 
 ## File Component Structure

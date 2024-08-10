@@ -14,57 +14,86 @@ import {
 } from "firebase/auth";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addErrorMessage, addUserEmail, addUserName, addUserphoto, checkLoggedIn } from "../utils/userSlice";
-import { addDoc, collection } from "firebase/firestore";
-import banner from "../assets/banner.png"
+import {
+  addErrorMessage,
+  adduid,
+  addUserEmail,
+  addUserName,
+  addUserphoto,
+  checkLoggedIn,
+} from "../utils/userSlice";
+import { addDoc, collection, getDocs } from "firebase/firestore";
+import banner from "../assets/banner.png";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
   const [signIn, setSignIn] = useState(true);
+  const [unique, setunique] = useState(true);
 
   const email1 = useRef();
   const password1 = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const errorMes = useSelector((store)=>store.user.errorMessage)
-  const userData = useSelector(store=>store.user)
-
-
+  const errorMes = useSelector((store) => store.user.errorMessage);
+  const userData = useSelector((store) => store.user);
+  const user1 = useAuthState(auth)[0];
 
   // toggle sign in
   const handleSignIn = () => {
     setSignIn(!signIn);
   };
-  
 
   // ************************* creating user database on signup
-  const createUserDatabase = async()=>{
-     try{
-       const docRef = await addDoc(collection(db,"users"),{
-         name1: userData.userName,
-         bio:"Cofounder",
-         email1:userData.email,
-         image:userData.imageURL,
-         friends:[],
-         banner:banner,
-         location:null,
-         posts:[],
-         
-        })
+  // checking for data in google email , else creating demo data
+  const uniqueUser = async () => {
+    console.log("uniqueUser")
+    const allUsers = await getDocs(collection(db, "users"));
+    let isUnique = true;
+    allUsers.forEach((item) => {
+      console.log(item.data())
+      if (item.data().email1 === userData.email) {
+        isUnique = false;
+        console.log("user already exist", item.data().email1, userData.email,unique);
+      }
+    });
+   
+    return isUnique;
+  };
+  const createUserDatabase = async () => {
+    try {
+      // add to database ifcheck for unique user
+      const isUnique = await uniqueUser();
+      if(!isUnique) return;
+      
+     
+        console.log("createUserDatabase")
+        const docRef = await addDoc(collection(db, "users"), {
+          name1:
+            userData?.userName !== null
+              ? userData?.userName
+              : userData?.email?.split("@")[0],
+          bio: "Job Seeker | Tech Enthusiast",
+          email1: userData.email,
+          image: userData.imageURL,
+          friends: [],
+          photo: userData?.imageURL !== null ? userData?.imageURL : photo,
+          banner: banner,
+          location: null,
+          posts: [],
+          // uid: user1?.uid !== null ? user1?.uid : "uid" + email1,
+        });
         console.log("created user database");
-     }
-     catch(e){
-      console.log(e)
-
-     }
-  }
-  
+      
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   // ********************sign Up via email password
   const handleSignup = () => {
     // console.log(email1.current.value, password1.current.value);
 
-        // if false then sign UP
+    // if false then sign UP
     if (!signIn) {
       createUserWithEmailAndPassword(
         auth,
@@ -74,20 +103,19 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           // ...
-          console.log("signup sucess",email1?.current?.value?.split("@")[0]);
+          console.log("signup sucess", email1?.current?.value?.split("@")[0]);
           // addding user data
           dispatch(addUserEmail(user?.email));
           dispatch(addUserName(user?.email?.split("@")[0]));
           dispatch(checkLoggedIn(true));
-          createUserDatabase()
+          createUserDatabase();
 
           // updating he auth user
-          updateProfile(auth.currentUser,{
-            displayName:user?.email?.split("@")[0],
-            photoURL:photo,
-            banner:banner
-          })
-        
+          updateProfile(auth.currentUser, {
+            displayName: user?.email?.split("@")[0],
+            photoURL: photo,
+            banner: banner,
+          });
 
           // nagivation if sucess
           navigate("/feed");
@@ -96,7 +124,7 @@ const Login = () => {
           const errorCode = error.code;
           const errorMessage = error.message;
           console.log(errorMessage);
-        
+
           dispatch(addErrorMessage(errorMessage));
           // ..
         });
@@ -116,19 +144,16 @@ const Login = () => {
           // ...
           dispatch(addUserEmail(user.email));
           dispatch(addUserName(user.email.split("@")[0]));
-          dispatch(checkLoggedIn(true))
+          dispatch(checkLoggedIn(true));
           navigate("/feed");
         })
         .catch((error) => {
-          const errorCode = error.code;
+          // const errorCode = error.code;
           const errorMessage = error.message;
-          
+
           dispatch(addErrorMessage(errorMessage));
         });
     }
-
-    
-
   };
   // *********************** sign in via google
   const googleSignup = () => {
@@ -141,20 +166,22 @@ const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user,auth);
+        console.log(user, auth);
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(user.displayName));
         dispatch(addUserphoto(user.photoURL));
         dispatch(checkLoggedIn(true));
-        createUserDatabase()
-        navigate("/feed")
+        dispatch(adduid(user.uid));
+        // console(user)
+        createUserDatabase();
+        navigate("/feed");
       })
       .catch((error) => {
         // Handle Errors here.
-        const errorCode = error.code;
+        // const errorCode = error.code;
         const errorMessage = error.message;
         // The email of the user's account used.
-        const email = error.customData.email;
+        // const email = error.customData.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
@@ -195,10 +222,11 @@ const Login = () => {
               type="password"
               placeholder="Password"
             />
-            {errorMes &&
-            <div className="text-sm  text-red-600 font-semibold my-2">
-              {errorMes.split(":")[1]}
-            </div>}
+            {errorMes && (
+              <div className="text-sm  text-red-600 font-semibold my-2">
+                {errorMes.split(":")[1]}
+              </div>
+            )}
             <div className="text-xs  my-2">
               By clicking , you agree to LinkedIn’s User Agreement, Privacy
               Policy, and Cookie Policy.

@@ -14,6 +14,7 @@ const userSlice = createSlice({
         postOpen:false,
         pageLocation:"/feed",
         messageStatus:false,
+        uid:null
     },
     reducers:{
         addUserName:(state,action)=>{
@@ -33,7 +34,7 @@ const userSlice = createSlice({
             state.postOpen =!state.postOpen;
         },
         checkLoggedIn:(state,action)=>{
-            console.log(state.loggedIn)
+            // console.log(state.loggedIn)
             state.loggedIn =action.payload;
         },
         updatePageLocation:(state,action)=>{
@@ -41,9 +42,12 @@ const userSlice = createSlice({
         },
         toggleMessageStatus:(state)=>{
             state.messageStatus =!state.messageStatus;
+        },
+        adduid:(state,action)=>{
+            state.uid =action.payload;
         }
     }
 })
 
-export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,addUserphoto,checkLoggedIn,updatePageLocation,toggleMessageStatus} = userSlice.actions;
+export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,addUserphoto,checkLoggedIn,updatePageLocation,toggleMessageStatus, adduid} = userSlice.actions;
 export default userSlice.reducer;

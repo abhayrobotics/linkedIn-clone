@@ -12,7 +12,7 @@ import photo from "../assets/photo.jpg";
 const Profile = ({ mainProfile }) => {
   const UserData = useSelector((store) => store.user);
   const UserData1 = useAuthState(auth)[0]
-  console.log(UserData1);
+  // console.log(UserData1);
   const dispatch = useDispatch();
   return (
     <div className=" m-1  max-w-screen sm:max-w-[250px]  min-w-16 border border-slate-300 h-56 bg-white hover:shadow-md   rounded-lg overflow-hidden">

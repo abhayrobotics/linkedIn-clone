@@ -26,7 +26,7 @@ const PeopleToKnow = () => {
           };
 
   return (
-    <div className="flex max-w-6/12 pl-3 pb-3">
+    <div className="flex   w-9/12 pl-3 pb-3">
         
         {/* side ui */}
         <div className="flex flex-col">
