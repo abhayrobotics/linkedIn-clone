@@ -7,11 +7,13 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import { auth, db } from "../utils/firebase";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const SendMessage = () => {
+const SendMessage = ({scroll}) => {
 
   const [message, setMessage] = useState("");
+
+  
   // send message function
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -34,9 +36,14 @@ const SendMessage = () => {
       createdAt: timeStamp,
     });
     setMessage("");
+    
+    scroll.current.scrollIntoView({ behavior: 'smooth' });
+      
+    
+
   };
   return (
-    <div>
+    <div className="absolute bottom-0">
       <form>
         <input
           type="text "

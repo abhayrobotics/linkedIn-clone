@@ -28,7 +28,7 @@
 - multiple user signup handling ✅
 - page for people to follow.
 
-## File Structure
+## File Component Structure
 
 - Login
 - feed
@@ -37,6 +37,9 @@
   - NewPost --> Create Post(z-30)
   - Post(multiple)
   - News
+  - Messenger
+      - SendMessage
+      - Message
 - Account Page
 - Network Page
   - Profile
@@ -48,6 +51,7 @@
 - navigate using if loggdin ?✅
     - authentication have tobe checked with firebase server  as  redux variable gets null on refresh
 - profile photo change on refresh bug
+- overflow-scroll not working in message
 
 
 ## standard

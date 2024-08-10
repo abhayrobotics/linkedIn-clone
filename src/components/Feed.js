@@ -73,7 +73,7 @@ const Feed = () => {
   };
 
   return (
-    <div>
+    <div className="relative">
       {togglePostShow && <CreatePost />}
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 ">
