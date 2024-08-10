@@ -31,6 +31,7 @@ const CreatePost = () => {
         date: date1,
         username: UserData1?.displayName,
         uid: UserData1?.uid,
+        photoURL:UserData1?.photoURL,
         likeCount:0,
         likeFlag:false,
         Comment:[],

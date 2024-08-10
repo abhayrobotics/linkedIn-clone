@@ -17,9 +17,9 @@ import {
 import { useEffect } from "react";
 
 const Post = ({ postData }) => {
-  const [id, post, username, date, likeCount, likeFlag] = postData;
+  const {id, post, username, date, likeCount, likeFlag,uid, photoURL} = postData;
   const UserData = useSelector((store) => store.user);
-  // console.log(post);
+  // console.log(uid);
 
   const handleLike = async () => {
     // handle like of a post
@@ -38,7 +38,7 @@ const Post = ({ postData }) => {
       {/* ****************************** User Details */}
       <div className="flex justify-between">
         <div className="flex">
-          <img src={UserData?.imageURL} className="w-12 rounded-full" />
+          <img src={ photoURL} className="w-12 rounded-full" />
           <div>
             <div className="px-2 text-sm font-semibold">{username}</div>
             <div className="px-2 text-xs text-slate-500">

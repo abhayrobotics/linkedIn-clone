@@ -7,7 +7,16 @@ import CreatePost from "./CreatePost";
 import { useDispatch, useSelector } from "react-redux";
 
 import { db } from "../utils/firebase";
-import { getDocs, collection, onSnapshot, doc } from "firebase/firestore";
+import {
+  getDocs,
+  collection,
+  onSnapshot,
+  doc,
+  query,
+  limit,
+  QuerySnapshot,
+  orderBy,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../utils/postSlice";
@@ -29,22 +38,30 @@ const Feed = () => {
   }
 
   useEffect(() => {
-    // db.collection("Posts").onSnapShot((snapshot) => {
-    //   setData1(
-    //     snapshot.docs.map((doc) => ({
-    //       doc:doc.data(),
-    //       id:doc.id
-    //     }))
-    //   );
-    // });
-
     console.log(" trigger 2", allPost);
 
-    // onSnapshot(doc(db,'Posts',"CsBuoh0eYgRQmIBIRYox"),(doc1)=>{
-    //   console.log(doc1.data())
-    // })
+    const PostQ = query(
+      collection(db, "Posts"),
+      orderBy("date"),
+      limit(20)
+    );
 
-    PreviousPost();
+    const unsubscibe = onSnapshot(PostQ, (QuerySnapshot) => {
+      const AllpostData = [];
+
+      QuerySnapshot.forEach((doc) => {
+        AllpostData.push({ ...doc.data(), id: doc.id });
+
+        AllpostData.sort((a, b) => a[3] - b[3]);
+        AllpostData.reverse();
+        console.log(AllpostData);
+        setData1(AllpostData);
+      });
+
+      return () => unsubscibe;
+    });
+
+    // PreviousPost();
   }, []);
 
   const PreviousPost = async () => {
@@ -54,12 +71,12 @@ const Feed = () => {
     querySnapshot.forEach((doc) => {
       dataArray.push([
         doc.id,
-        doc.data()?.uid,
-        doc.data()?.post,
-        doc.data()?.username,
-        doc.data()?.date,
-        doc.data()?.likeCount,
-        doc.data()?.likeFlag,
+        doc.data().post,
+        doc.data().username,
+        doc.data().date,
+        doc.data().likeCount,
+        doc.data().likeFlag,
+        doc.data().photoURL,
       ]);
 
       // sorting data based on date, then latest first
@@ -87,7 +104,8 @@ const Feed = () => {
             {
               // post items
               dataToShow?.map((data) => {
-                return <Post key={data[0]} postData={data} />;
+                console.log(data);
+                return <Post key={data.id} postData={data} />;
                 // return <Post  key={data[0]}  postData={data[1]} name={data[2]} id={data[0]}  />;
               })
             }
