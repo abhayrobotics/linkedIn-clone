@@ -11,7 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { addUserEmail, addUserName, checkLoggedIn, toggleMessageStatus, updatePageLocation } from "../utils/userSlice";
+import { addUserEmail, addUserName, checkLoggedIn, clearData, toggleMessageStatus, updatePageLocation } from "../utils/userSlice";
 import Messenger from "./Messenger";
 
 
@@ -27,10 +27,11 @@ const Header = ({show}) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-       
+        console.log(user)
         //   dispacth an action using reducer fn()
+        const name3 = user?.displayName===null?userData.userName:user?.displayName;
         dispatch(addUserEmail(user.email));
-        dispatch(addUserName(user.displayName));
+        dispatch(addUserName(name3));
         dispatch(checkLoggedIn(true));
 
         // navigating to feed page
@@ -44,13 +45,14 @@ const Header = ({show}) => {
 
     // unsubscribe when the component unmounts
     return () => unSubscribe();
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate,auth]);
 
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         console.log("sign out success",auth);
+        dispatch(clearData());
         navigate("/");
       })
       .catch((error) => {

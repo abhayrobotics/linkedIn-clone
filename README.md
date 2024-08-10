@@ -57,6 +57,7 @@
 - click on messaging to open and not on up arrow only
 - a post can only be liked once. change to like for more users.
 - in post line change is replaced by space
+- first login email = null in db
 
 ## standard
 

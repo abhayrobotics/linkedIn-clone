@@ -38,6 +38,11 @@ const Login = () => {
   const userData = useSelector((store) => store.user);
   const user1 = useAuthState(auth)[0];
 
+  useEffect(()=>{
+    console.log("useEffect called")
+    createUserDatabase()
+  })
+
   // toggle sign in
   const handleSignIn = () => {
     setSignIn(!signIn);
@@ -102,11 +107,12 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          const name2 = email1?.current?.value?.split("@")[0];
           // ...
           console.log("signup sucess", email1?.current?.value?.split("@")[0]);
           // addding user data
           dispatch(addUserEmail(user?.email));
-          dispatch(addUserName(user?.email?.split("@")[0]));
+          dispatch(addUserName(name2));
           dispatch(checkLoggedIn(true));
           createUserDatabase();
 
@@ -145,6 +151,7 @@ const Login = () => {
           dispatch(addUserEmail(user.email));
           dispatch(addUserName(user.email.split("@")[0]));
           dispatch(checkLoggedIn(true));
+          createUserDatabase();
           navigate("/feed");
         })
         .catch((error) => {
