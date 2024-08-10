@@ -24,7 +24,7 @@
 - search with gemini ai, post with ai
 - lazy loading
 - memoization
-- messaging
+- messaging✅
 - multiple user signup handling ✅
 - page for people to follow.
 
@@ -47,13 +47,15 @@
 
 ## Bug
 - not rerender on new post arrival
-- like button not updated.
+- like button not updated.✅
 - navigate using if loggdin ?✅
-    - authentication have tobe checked with firebase server  as  redux variable gets null on refresh
-- profile photo change on refresh bug
+    - authentication have tobe checked with firebase server  as  redux variable gets null on refresh✅
+- profile photo change on refresh bug✅
 - overflow-scroll not working in message ✅`
 - scroll to current msg pending
 - click on messaging to open and not on up arrow only
+- a post can only be liked once. change to like for more users.
+- in post line change is replaced by space
 
 ## standard
 

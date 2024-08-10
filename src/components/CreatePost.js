@@ -1,7 +1,7 @@
 import CloseIcon from "@mui/icons-material/Close";
 import { useDispatch, useSelector } from "react-redux";
 import { togglePostShow } from "../utils/userSlice";
-import { collection, getDocs, addDoc,doc,setDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc,doc,setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "../utils/firebase";
 import { useRef } from "react";
 import { PreviousPost } from "./Feed";
@@ -25,10 +25,10 @@ const CreatePost = () => {
 
     // add new  data to cloud
     try {
-      const date1 = new Date();
+      // const date1 = new Date();
       const docRef = await addDoc(collection(db, "Posts"), {
         post: postText.current.value,
-        date: date1,
+        date: serverTimestamp(),
         username: UserData1?.displayName,
         uid: UserData1?.uid,
         photoURL:UserData1?.photoURL,

@@ -19,8 +19,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addPost } from "../utils/postSlice";
-import Messenger from "./Messenger";
+
 
 const Feed = () => {
   const navigate = useNavigate();
@@ -33,16 +32,16 @@ const Feed = () => {
 
   // navigating if not logged in
   if (!userData.loggedIn) {
-    console.log(" trigger 1");
+    // console.log(" trigger 1");
     // navigate("/");
   }
 
   useEffect(() => {
-    console.log(" trigger 2", allPost);
+    // console.log(" trigger 2", allPost);
 
     const PostQ = query(
       collection(db, "Posts"),
-      orderBy("date"),
+      // orderBy("date"),
       limit(20)
     );
 
@@ -51,10 +50,10 @@ const Feed = () => {
 
       QuerySnapshot.forEach((doc) => {
         AllpostData.push({ ...doc.data(), id: doc.id });
-
-        AllpostData.sort((a, b) => a[3] - b[3]);
+        // console.log(doc.data().date)
+        AllpostData.sort((a, b) => a.date - b.date);
         AllpostData.reverse();
-        console.log(AllpostData);
+        // console.log(AllpostData);
         setData1(AllpostData);
       });
 
@@ -104,7 +103,7 @@ const Feed = () => {
             {
               // post items
               dataToShow?.map((data) => {
-                console.log(data);
+                // console.log(data);
                 return <Post key={data.id} postData={data} />;
                 // return <Post  key={data[0]}  postData={data[1]} name={data[2]} id={data[0]}  />;
               })
