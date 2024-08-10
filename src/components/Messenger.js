@@ -39,7 +39,7 @@ const Messenger = () => {
       const sortedMessages = fetchedMessages.sort(
         (a, b) => a.createdAt - b.createdAt
       );
-      console.log(sortedMessages);
+      // console.log(sortedMessages);
       setAllMessage(sortedMessages);
     });
     return () => unsubscribe;
@@ -51,7 +51,7 @@ const Messenger = () => {
   return (
     <div className="">
       <div className="z-20 fixed right-0 bottom-0 w-72   border-slate-500  rounded-t-lg border bg-white">
-        {console.log(user)}
+        {/* {console.log(user)} */}
 
         {/* header */}
         <div className="flex justify-between p-2">
@@ -59,7 +59,7 @@ const Messenger = () => {
             <img src={user?.photoURL} className="w-8 rounded-full" />
             <p className="px-2 font-semibold">Messaging</p>
           </div>
-          {console.log(messageStatus)}
+          {/* {console.log(messageStatus)} */}
           {messageStatus ? (
             <div className="cursor-pointer" onClick={handleMessageContainer}>
               <KeyboardArrowDownIcon />

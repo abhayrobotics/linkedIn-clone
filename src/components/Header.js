@@ -21,6 +21,7 @@ const Header = ({show}) => {
   const userData = useSelector(store=>store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   
   // handles chnage in auth state, same code in Login
   useEffect(() => {
@@ -115,6 +116,7 @@ const Header = ({show}) => {
           </div>
 
           <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+
             <AccountCircleIcon
               className="text-slate-400 hover:text-black "
               sx={{ fontSize: 25 }}

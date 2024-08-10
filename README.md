@@ -53,7 +53,7 @@
 - profile photo change on refresh bug
 - overflow-scroll not working in message ✅`
 - scroll to current msg pending
-
+- click on messaging to open and not on up arrow only
 
 ## standard
 

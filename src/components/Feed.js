@@ -54,11 +54,12 @@ const Feed = () => {
     querySnapshot.forEach((doc) => {
       dataArray.push([
         doc.id,
-        doc.data().post,
-        doc.data().username,
-        doc.data().date,
-        doc.data().likeCount,
-        doc.data().likeFlag,
+        doc.data()?.uid,
+        doc.data()?.post,
+        doc.data()?.username,
+        doc.data()?.date,
+        doc.data()?.likeCount,
+        doc.data()?.likeFlag,
       ]);
 
       // sorting data based on date, then latest first

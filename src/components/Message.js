@@ -4,7 +4,7 @@ import { auth } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 const Message = ({ message }) => {
 
-  const logInUser = useAuthState(auth)[0].uid;
+  const logInUser = useAuthState(auth)[0]?.uid;
   // console.log(logInUser)
   // console.log(message.uid)
   return (
