@@ -1,13 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 import banner from "../assets/banner.png"
-
-
+import photo from "../assets/photo.jpg";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./firebase";
 const userSlice = createSlice({
     name:"user",
     initialState:{
         userName:"My Account",
         email:null,
-        imageURL:"https://avatars.githubusercontent.com/u/58120166?v=4",
+        imageURL:photo,
         errorMessage:null,
         loggedIn:false,
         postOpen:false,

@@ -1,6 +1,7 @@
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { useNavigate } from "react-router-dom";
 import google from "../assets/google.png";
+import photo from "../assets/photo.jpg";
 import Header from "./Header";
 import { auth, db } from "../utils/firebase";
 import {
@@ -9,12 +10,14 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addErrorMessage, addUserEmail, addUserName, addUserphoto, checkLoggedIn } from "../utils/userSlice";
 import { addDoc, collection } from "firebase/firestore";
 import banner from "../assets/banner.png"
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Login = () => {
   const [signIn, setSignIn] = useState(true);
@@ -32,6 +35,7 @@ const Login = () => {
   const handleSignIn = () => {
     setSignIn(!signIn);
   };
+  
 
   // ************************* creating user database on signup
   const createUserDatabase = async()=>{
@@ -76,6 +80,14 @@ const Login = () => {
           dispatch(addUserName(user?.email?.split("@")[0]));
           dispatch(checkLoggedIn(true));
           createUserDatabase()
+
+          // updating he auth user
+          updateProfile(auth.currentUser,{
+            displayName:user?.email?.split("@")[0],
+            photoURL:photo,
+            banner:banner
+          })
+        
 
           // nagivation if sucess
           navigate("/feed");

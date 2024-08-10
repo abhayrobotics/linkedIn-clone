@@ -6,6 +6,7 @@ import { auth, db } from "../utils/firebase";
 import { useRef } from "react";
 import { PreviousPost } from "./Feed";
 import { useAuthState } from "react-firebase-hooks/auth";
+import photo from "../assets/photo.jpg";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,7 @@ const CreatePost = () => {
           {/* ******************************** User Name */}
           <div className="flex  justify-between p-4  ">
             <div className="flex">
-              <img src={UserData1?.photoURL} className="w-12 rounded-full" />
+              <img src={UserData1?.photoURL===null?photo:UserData1?.photoURL} className="w-12 rounded-full" />
               <div className="px-2 py-2 text-lg font-semibold">
                 {UserData1?.displayName}
               </div>
