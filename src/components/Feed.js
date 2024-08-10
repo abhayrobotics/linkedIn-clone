@@ -73,7 +73,7 @@ const Feed = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative overflow-x-hidden">
       {togglePostShow && <CreatePost />}
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 ">
@@ -95,7 +95,7 @@ const Feed = () => {
           {/* <News className="w-1/4" /> */}
         </div>
       </div>
-      <Messenger />
+      {/* <Messenger /> */}
     </div>
   );
 };

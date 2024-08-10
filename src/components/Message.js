@@ -5,8 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const Message = ({ message }) => {
 
   const logInUser = useAuthState(auth)[0].uid;
-  console.log(logInUser)
-  console.log(message.uid)
+  // console.log(logInUser)
+  // console.log(message.uid)
   return (
     <div className=" flex flex-col p-2">
       <div className={` text-sm  p-2 ${logInUser ===message.uid ? "owner":"receiver"}`}>

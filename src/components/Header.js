@@ -11,7 +11,8 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { addUserEmail, addUserName, checkLoggedIn, updatePageLocation } from "../utils/userSlice";
+import { addUserEmail, addUserName, checkLoggedIn, toggleMessageStatus, updatePageLocation } from "../utils/userSlice";
+import Messenger from "./Messenger";
 
 
 const Header = ({show}) => {
@@ -59,6 +60,7 @@ const Header = ({show}) => {
 
 
   return (
+    <>
     <div className={`${show} sticky top-0 left-0 flex justify-center bg-white z-20`}>
       <div className="flex justify-between max-w-7/12 w-9/12">
         <div className="flex items-center py-2 px-5 text-mainColor ">
@@ -94,14 +96,15 @@ const Header = ({show}) => {
             />
            <p className=" text-xs  text-slate-600 scroll ">Jobs</p>
           </div>
-
-          <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-            <TextsmsIcon
-              className="text-slate-400 hover:text-black "
-              sx={{ fontSize: 25 }}
-            />
-           <p className=" text-xs  text-slate-600 scroll ">Messages</p>
-          </div>
+          <Link onClick={()=>dispatch(toggleMessageStatus())}>
+            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+              <TextsmsIcon
+                className="text-slate-400 hover:text-black "
+                sx={{ fontSize: 25 }}
+              />
+            <p className=" text-xs  text-slate-600 scroll ">Messages</p>
+            </div>
+          </Link>
 
           <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
             <NotificationsIcon
@@ -122,6 +125,11 @@ const Header = ({show}) => {
         </div>
       </div>
     </div>
+    {
+      userName!="My Account"?
+      <Messenger />:null
+    }
+    </>
   );
 };
 

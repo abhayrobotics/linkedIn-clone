@@ -12,6 +12,7 @@ const userSlice = createSlice({
         loggedIn:false,
         postOpen:false,
         pageLocation:"/feed",
+        messageStatus:false,
     },
     reducers:{
         addUserName:(state,action)=>{
@@ -36,9 +37,12 @@ const userSlice = createSlice({
         },
         updatePageLocation:(state,action)=>{
             state.pageLocation =action.payload;
+        },
+        toggleMessageStatus:(state)=>{
+            state.messageStatus =!state.messageStatus;
         }
     }
 })
 
-export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,addUserphoto,checkLoggedIn,updatePageLocation} = userSlice.actions;
+export const {addUserName,addUserEmail,addErrorMessage,togglePostShow,addUserphoto,checkLoggedIn,updatePageLocation,toggleMessageStatus} = userSlice.actions;
 export default userSlice.reducer;
