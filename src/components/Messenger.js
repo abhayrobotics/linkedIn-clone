@@ -1,58 +1,49 @@
-import {
-  addDoc,
-  collection,
-  Firestore,
-  serverTimestamp,
-  limit,
-  onSnapshot,
-} from "firebase/firestore";
-import React, { useState } from "react";
-import { auth, db } from "../utils/firebase";
-import AllMessage from "./AllMessage";
+
+import React, { useEffect, useState } from "react";
+
+import Message from "./Message";
+import SendMessage from "./SendMessage";
+import { collection, limit, onSnapshot, orderBy, query } from "firebase/firestore";
+import { db } from "../utils/firebase";
 
 const Messenger = () => {
-  const [message, setMessage] = useState("");
-  const SendMessage = async (e) => {
-    e.preventDefault();
+  const [allMessage, setAllMessage] = useState([]);
 
-    if (message.trim() === "") {
-      alert("Enter your message!");
-      return;
-    }
-
-    const { uid, displayName, photoURL } = auth.currentUser;
-    console.log(displayName);
-    const timeStamp = serverTimestamp()
-
-    await addDoc(collection(db, "messages"), {
-      text: message,
-      name: displayName,
-      uid,
-      photo: photoURL,
-      createdAt: timeStamp,
+  useEffect(() => {
+    const q = query(
+      collection(db, "messages"),
+      orderBy("createdAt", "desc"),
+      limit(50)
+    );
+    const unsubscribe = onSnapshot(q, (QuerySnapshot) => {
+      const fetchedMessages = [];
+      QuerySnapshot.forEach((doc) => {
+        fetchedMessages.push({ ...doc.data(), id: doc.id });
+      });
+      const sortedMessages = fetchedMessages.sort(
+        (a, b) => a.createdAt - b.createdAt
+      );
+      console.log(sortedMessages)
+      setAllMessage(sortedMessages);
     });
-    setMessage("");
-  };
+    return () => unsubscribe;
+  }, []);
+
+  
 
   return (
     <div>
       <div className=" absolute right-0 bottom-0 w-72 h-2/3 border-slate-500  rounded-t-lg border bg-white">
-        <AllMessage />
-        <form>
-          <input
-            type="text "
-            className="bg-feedColor rounded-lg p-3"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Write a message"
-          />
-          <button
-            className="border bg-slate-300 p-3 mx-2 rounded-md"
-            onClick={(e) => SendMessage(e)}
-          >
-            Send
-          </button>
-        </form>
+      {console.log(allMessage)}
+        {
+          allMessage?.map((item) =>{
+            return(<Message key={item.uid} message={item.text} />)
+          })
+        }
+        
+
+        <SendMessage />
+        
       </div>
     </div>
   );
