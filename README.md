@@ -356,5 +356,11 @@ const handlePost = async () => {
 
 ## created a userdatabase on signup using createUserDatabase fucntion in login.js
 
-
-npm install react-firebase-hooks
+## messenger
+- npm install react-firebase-hooks
+- created chat app using firebase firestore having 3 component
+  - messenger- Chat UI
+              - retriving the data using OnsnapShot method  of firebase and then storing in a state component and send each message to Message component for rendering 
+  - Send message- using addDoc storing the message in db 
+  - message - looping the component for UI. design based on owner or receiver.
+            -
