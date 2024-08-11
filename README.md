@@ -6,6 +6,7 @@
 - Material UI icons
 - Firebase Authentication
 - firebase firestore
+- realtime firestore db
 - news API
 - redux Toolkit
 
@@ -16,7 +17,8 @@
 - login Error Handling✅
 - firebase authentication✅
 - Header✅
-- icon in header + search functionality
+- icon in header✅ 
+- search functionality
 - create a post :✅
 - like ✅
 - share comment , reply to a comment (nested)
@@ -32,6 +34,7 @@
 - connection request
 - editable account page.
 - upload a photo in post using firebase storage.
+- gemini ai  for improving post
 
 ## File Component Structure
 
