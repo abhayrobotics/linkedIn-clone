@@ -10,10 +10,10 @@ import { doc, updateDoc } from "firebase/firestore";
 
 
 const Post = ({ postData }) => {
-  const { id, post, username, likeCount, likeFlag, photoURL } = postData;
+  const { id, post,postImg, username, likeCount, likeFlag, photoURL } = postData;
+  // console.log(postData);
 
-  // console.log(uid);
-
+  
   const handleLike = async () => {
     // handle like of a post
     // const oldLikeCount =
@@ -44,6 +44,7 @@ const Post = ({ postData }) => {
 
       {/* ***********************************Post */}
       <div className="text-sm py-2">{post}</div>
+      {postImg && <img src={postImg} className="w-full" alt="post" />}
       {/* *****************************Like comment share */}
       <hr className="my-2" />
       <div className="pb-4 px-4 flex justify-between cursor-pointer">

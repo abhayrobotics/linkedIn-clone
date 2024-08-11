@@ -30,6 +30,8 @@
     - check unique user and adding to database✅
 - page for people to follow.
 - connection request
+- editable account page.
+- upload a photo in post using firebase storage.
 
 ## File Component Structure
 
