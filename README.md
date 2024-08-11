@@ -18,7 +18,8 @@
 - Header✅
 - icon in header + search functionality
 - create a post :✅
-- like share comment , reply to a comment (nested)
+- like ✅
+- share comment , reply to a comment (nested)
 - firebase firestore✅
 - network page with people to connect
 - search with gemini ai, post with ai
@@ -26,8 +27,9 @@
 - memoization
 - messaging✅
 - multiple user signup handling ✅
-    - check unique user and adding to database
+    - check unique user and adding to database✅
 - page for people to follow.
+- connection request
 
 ## File Component Structure
 

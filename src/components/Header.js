@@ -11,7 +11,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { addUserEmail, addUserName, checkLoggedIn, clearData, toggleMessageStatus, updatePageLocation } from "../utils/userSlice";
+import { adduid, addUserEmail, addUserName, checkLoggedIn, clearData, toggleMessageStatus, updatePageLocation } from "../utils/userSlice";
 import Messenger from "./Messenger";
 
 
@@ -33,6 +33,7 @@ const Header = ({show}) => {
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(name3));
         dispatch(checkLoggedIn(true));
+        dispatch(adduid(user.uid));
 
         // navigating to feed page
         navigate(userData.pageLocation);
