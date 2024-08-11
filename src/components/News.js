@@ -13,7 +13,7 @@ const News = () => {
     const json = await data.json();
     // console.log(json);
     // console.log(json.articles.slice(0, 10));
-    setnewsData(json.articles.slice(0, 10));
+    setnewsData(json?.articles?.slice(0, 10));
   };
   
   const now= new Date();

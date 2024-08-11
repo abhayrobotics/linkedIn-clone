@@ -28,14 +28,14 @@ const CreatePost = () => {
   // console.log(UserData1);
 
   useEffect(() => {
-    console.log('imagePostURL:', imagePostURL);
+    // console.log('imagePostURL:', imagePostURL);
   }, [imagePostURL]);
   //   linking thepost to firebase store
 
   
 
   const handlePost = async () => {
-    console.log(postText.current.value, serverTimestamp());
+    // console.log(postText.current.value, serverTimestamp());
 
     // close the post
     dispatch(togglePostShow());
@@ -70,7 +70,7 @@ const CreatePost = () => {
         likeFlag: false,
         Comment: [],
       });
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
     }

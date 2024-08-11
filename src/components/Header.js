@@ -52,7 +52,7 @@ const Header = ({show}) => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        console.log("sign out success",auth);
+        // console.log("sign out success",auth);
         dispatch(clearData());
         navigate("/");
       })

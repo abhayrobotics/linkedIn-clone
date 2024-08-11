@@ -7,7 +7,7 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 
 const Profile = ({ mainProfile,data }) => {
   const UserData = useSelector((store) => store.user);
-  console.log(data)
+  // console.log(data)
   const dispatch = useDispatch();
   return (
     <div className=" m-1  max-w-screen sm:max-w-[250px]  min-w-[200px] border border-slate-300 h-56 bg-white hover:shadow-md   rounded-lg overflow-hidden">

@@ -23,7 +23,7 @@ const AccountPage = () => {
         // console.log(item?.id,data?.email);
         if (item.data()?.email1 === data?.email) {
           uid = item.id;
-          console.log(uid);
+          // console.log(uid);
         }
       });
 
@@ -48,8 +48,8 @@ const AccountPage = () => {
         }
       });
       setPosts(allPostData);
-      console.log(allPostData);
-      console.log(posts);
+      // console.log(allPostData);
+      // console.log(posts);
     } catch (e) {
       console.log(e);
     }
@@ -58,7 +58,7 @@ const AccountPage = () => {
     useEffect(() => {
       dataFromdb();
       postData();
-      console.log(allDetails);
+      // console.log(allDetails);
     }, []);
 
     return (

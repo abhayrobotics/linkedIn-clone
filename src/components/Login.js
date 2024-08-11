@@ -39,7 +39,7 @@ const Login = () => {
   const user1 = useAuthState(auth)[0];
 
   useEffect(()=>{
-    console.log("useEffect called")
+    // console.log("useEffect called")
     createUserDatabase()
   })
 
@@ -51,14 +51,14 @@ const Login = () => {
   // ************************* creating user database on signup
   // checking for data in google email , else creating demo data
   const uniqueUser = async () => {
-    console.log("uniqueUser")
+    // console.log("uniqueUser")
     const allUsers = await getDocs(collection(db, "users"));
     let isUnique = true;
     allUsers.forEach((item) => {
-      console.log(item.data())
+      // console.log(item.data())
       if (item.data().email1 === userData.email) {
         isUnique = false;
-        console.log("user already exist", item.data().email1, userData.email,unique);
+        // console.log("user already exist", item.data().email1, userData.email,unique);
       }
     });
    
@@ -71,7 +71,7 @@ const Login = () => {
       if(!isUnique) return;
       
      
-        console.log("createUserDatabase")
+        // console.log("createUserDatabase")
         const docRef = await addDoc(collection(db, "users"), {
           name1:
             userData?.userName !== null
@@ -86,7 +86,7 @@ const Login = () => {
           posts: [],
           // uid: user1?.uid !== null ? user1?.uid : "uid" + email1,
         });
-        console.log("created user database");
+        // console.log("created user database");
       
     } catch (e) {
       console.log(e);
@@ -145,7 +145,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log("signIN success");
+          // console.log("signIN success");
           // ...
           dispatch(addUserEmail(user.email));
           dispatch(addUserName(user.email.split("@")[0]));
@@ -172,7 +172,7 @@ const Login = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user, auth);
+        // console.log(user, auth);
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(user.displayName));
         dispatch(addUserphoto(user.photoURL));
