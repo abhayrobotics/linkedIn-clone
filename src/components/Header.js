@@ -119,11 +119,15 @@ const Header = ({show}) => {
           </div>
 
           <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-
-            <AccountCircleIcon
+          <img
+              src={userData.imageURL}
+              className="w-8 rounded-full "
+              alt="profile"
+            />
+            {/* <AccountCircleIcon
               className="text-slate-400 hover:text-black "
               sx={{ fontSize: 25 }}
-            />
+            /> */}
             <p className=" text-xs  text-slate-600 scroll text-nowrap" onClick={handleSignOut}> {userName==null?"My Account":userName}</p>
           </div>
 

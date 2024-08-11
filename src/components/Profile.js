@@ -17,7 +17,7 @@ const Profile = ({ mainProfile }) => {
   return (
     <div className=" m-1 w-[350px] xsm:w-[90%] sm:w-[600px] mx-auto md:mx-3  md:min-w-[250px] md:w-[250px]  border border-slate-300 h-56 bg-white hover:shadow-md   rounded-lg overflow-hidden">
       <div className="relative">
-        <img src={banner} alt="banner" className="absolute top-0 w-screen h-32 object-cover md:h-20 " />
+        <img src={banner} alt="banner" className="absolute top-0 w-screen h-32  object-cover md:max-h-20 " />
         <div className=" relative z-10 flex flex-col items-center py-3   ">
           <img
             src={UserData1?.photoURL===null?photo:UserData1?.photoURL}

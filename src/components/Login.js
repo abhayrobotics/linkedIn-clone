@@ -79,7 +79,6 @@ const Login = () => {
               : userData?.email?.split("@")[0],
           bio: "Job Seeker | Tech Enthusiast",
           email1: userData.email,
-          image: userData.imageURL,
           friends: [],
           photo: userData?.imageURL !== null ? userData?.imageURL : photo,
           banner: banner,

@@ -109,7 +109,7 @@ const Feed = () => {
               })
             }
           </div>
-          <div className="hidden ">
+          <div className="hidden lg:block ">
 
           <News className="min-w-2/12    " />
           </div>

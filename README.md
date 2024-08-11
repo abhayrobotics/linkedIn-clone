@@ -44,6 +44,9 @@
       - SendMessage
       - Message
 - Account Page
+      - Banner and Basic Info
+      - Activity
+      - Post(multiple)
 - Network Page
   - Profile
   - PeopleToknow

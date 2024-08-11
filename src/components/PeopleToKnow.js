@@ -37,9 +37,10 @@ const PeopleToKnow = () => {
         <div className="flex flex-col">
             <div>
             <h1 className="text-lg pl-2 pb-2">My Network</h1>
-                <div className="flex flex-wrap p-2 mb-2">
+                <div className="flex flex-wrap  mb-2">
+                <div className="p-3 rounded-lg w-full bg-white border ">
                    <p>You have 0 Connection. Increase your Network to meet new opportuity </p>
-                    
+                    </div>
                 </div>
             </div>
        
