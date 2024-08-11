@@ -26,7 +26,7 @@ const Post = ({ postData }) => {
   // console.table(likeCount,likeFlag)
 
   return (
-    <div className="m-1 p-3 pb-0 w-[600px] border border-slate-300  bg-white  rounded-lg ">
+    <div className="m-1 p-3 pb-0  w-[350px] xsm:w-[90%] mx-auto sm:w-[600px]  border border-slate-300  bg-white  rounded-lg ">
       {/* ****************************** User Details */}
       <div className="flex justify-between">
         <div className="flex">
@@ -47,7 +47,7 @@ const Post = ({ postData }) => {
       {/* *****************************Like comment share */}
       <hr className="my-2" />
       <div className="pb-4 px-4 flex justify-between cursor-pointer">
-        <div className="flex items-center cursor-pointer  rounded-lg px-6 py-2 hover:bg-feedColor"  onClick={handleLike}> 
+        <div className="flex items-center cursor-pointer  rounded-lg px-1 py-2 hover:bg-feedColor"  onClick={handleLike}> 
           {likeFlag ? (
             <ThumbUpIcon color="primary" />
           ) : (
@@ -58,11 +58,11 @@ const Post = ({ postData }) => {
           </p>
           {likeCount == null ? null : likeCount}
         </div>
-        <div className="flex items-center cursor-pointer  rounded-lg px-6 py-2 hover:bg-feedColor">
+        <div className="flex items-center cursor-pointer  rounded-lg px-1 py-2 hover:bg-feedColor">
           <ChatIcon sx={{ color: "slategray" }} />
           <p className="px-2 text-sm">Comment</p>
         </div>
-        <div className="flex items-center cursor-pointer   rounded-lg px-6 py-2 hover:bg-feedColor">
+        <div className="flex items-center cursor-pointer   rounded-lg px-1 py-2 hover:bg-feedColor">
           <SendIcon color="primary" />
           <p className="px-2 text-sm">Send</p>
         </div>

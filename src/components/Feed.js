@@ -94,11 +94,11 @@ const Feed = () => {
       {togglePostShow && <CreatePost />}
       <Header />
       <div className=" bg-feedColor flex justify-center py-6 ">
-        <div className=" flex justify-center flex-wrap flex-col sm:flex-row  w-9/12 ">
-          <Profile className="w-2/12" mainProfile={true} />
+        <div className=" flex justify-center flex-wrap flex-col sm:flex-row  min-w-9/12 ">
+          <Profile className="w-2/12 m-2" mainProfile={true} />
           <div className="flex flex-col  ">
             <NewPost />
-            <hr className="mx-1 my-2 border-1 border-slate-500" />
+            <hr className="mx-auto  my-2 w-[90%] md:w-[95%] border-1 border-slate-500" />
 
             {
               // post items
@@ -109,7 +109,10 @@ const Feed = () => {
               })
             }
           </div>
-          <News className="min-w-2/12" />
+          <div className="hidden ">
+
+          <News className="min-w-2/12    " />
+          </div>
           {/* <News className="w-1/4" /> */}
         </div>
       </div>
