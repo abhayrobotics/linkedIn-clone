@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,29 +7,35 @@ import PeopleIcon from "@mui/icons-material/People";
 import WorkIcon from "@mui/icons-material/Work";
 import TextsmsIcon from "@mui/icons-material/Textsms";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useEffect } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { adduid, addUserEmail, addUserName, checkLoggedIn, clearData, toggleMessageStatus, updatePageLocation } from "../utils/userSlice";
+import {
+  adduid,
+  addUserEmail,
+  addUserName,
+  checkLoggedIn,
+  clearData,
+  toggleMessageStatus,
+  updatePageLocation,
+} from "../utils/userSlice";
 import Messenger from "./Messenger";
 
-
-const Header = ({show}) => {
-
-  const userName = useSelector(store=>store.user.userName);
-  const userData = useSelector(store=>store.user);
+const Header = ({ show }) => {
+  const userName = useSelector((store) => store.user.userName);
+  const userData = useSelector((store) => store.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
   // handles chnage in auth state, same code in Login
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         // console.log(user)
         //   dispacth an action using reducer fn()
-        const name3 = user?.displayName===null?userData.userName:user?.displayName;
+        const name3 =
+          user?.displayName === null ? userData.userName : user?.displayName;
         dispatch(addUserEmail(user.email));
         dispatch(addUserName(name3));
         dispatch(checkLoggedIn(true));
@@ -46,8 +52,7 @@ const Header = ({show}) => {
 
     // unsubscribe when the component unmounts
     return () => unSubscribe();
-  }, [dispatch, navigate,auth]);
-
+  }, [dispatch, navigate, auth]);
 
   const handleSignOut = () => {
     signOut(auth)
@@ -62,82 +67,93 @@ const Header = ({show}) => {
       });
   };
 
-
   return (
     <>
-    <div className={`${show} sticky top-0 left-0 flex justify-center bg-white z-20`}>
-      <div className="flex justify-between max-w-7/12 w-9/12">
-        <div className="flex items-center py-2 px-5 text-mainColor ">
-          <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />
-          <SearchIcon sx={{ fontSize: 25 }} color="primary" />
-        </div>
-        {/* *********************icons**************** */}
-        <div className="flex items-center ">
-          <Link to="/feed" onClick={()=>dispatch(updatePageLocation("/feed"))}>
-            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-              <HomeIcon
-                className="text-slate-400 hover:text-black "
-                sx={{ fontSize: 25 }}
-              />
-            <p className=" text-xs  text-slate-600 scroll ">Home</p>
-            </div>
-          </Link>
-
-          <Link to="/network" onClick={()=>dispatch(updatePageLocation("/network"))}>
-            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-              <PeopleIcon
-                className="text-slate-400 hover:text-black "
-                sx={{ fontSize: 25 }}
-              />
-            <p className=" text-xs  text-slate-600 scroll text-nowrap ">My Network</p>
-            </div>
-          </Link>
-
-          <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-            <WorkIcon
-              className="text-slate-400 hover:text-black "
-              sx={{ fontSize: 25 }}
-            />
-           <p className=" text-xs  text-slate-600 scroll ">Jobs</p>
+      <div
+        className={`${show} sticky top-0 left-0 flex justify-center bg-white z-20`}
+      >
+        <div className="flex justify-between max-w-7/12 w-9/12">
+          <div className="flex items-center py-2 px-5 text-mainColor ">
+            <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />
+            <SearchIcon sx={{ fontSize: 25 }} color="primary" />
           </div>
-          <Link onClick={()=>dispatch(toggleMessageStatus())}>
+          {/* *********************icons**************** */}
+          <div className="flex items-center ">
+            <Link
+              to="/feed"
+              onClick={() => dispatch(updatePageLocation("/feed"))}
+            >
+              <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+                <HomeIcon
+                  className="text-slate-400 hover:text-black "
+                  sx={{ fontSize: 25 }}
+                />
+                <p className=" text-xs  text-slate-600 scroll ">Home</p>
+              </div>
+            </Link>
+
+            <Link
+              to="/network"
+              onClick={() => dispatch(updatePageLocation("/network"))}
+            >
+              <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+                <PeopleIcon
+                  className="text-slate-400 hover:text-black "
+                  sx={{ fontSize: 25 }}
+                />
+                <p className=" text-xs  text-slate-600 scroll text-nowrap ">
+                  My Network
+                </p>
+              </div>
+            </Link>
+
             <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-              <TextsmsIcon
+              <WorkIcon
                 className="text-slate-400 hover:text-black "
                 sx={{ fontSize: 25 }}
               />
-            <p className=" text-xs  text-slate-600 scroll ">Messages</p>
+              <p className=" text-xs  text-slate-600 scroll ">Jobs</p>
             </div>
-          </Link>
+            <Link onClick={() => dispatch(toggleMessageStatus())}>
+              <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+                <TextsmsIcon
+                  className="text-slate-400 hover:text-black "
+                  sx={{ fontSize: 25 }}
+                />
+                <p className=" text-xs  text-slate-600 scroll ">Messages</p>
+              </div>
+            </Link>
 
-          <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-            <NotificationsIcon
-              className="text-slate-400 hover:text-black "
-              sx={{ fontSize: 25 }}
-            />
-           <p className=" text-xs  text-slate-600 scroll ">Notifications</p>
-          </div>
+            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+              <NotificationsIcon
+                className="text-slate-400 hover:text-black "
+                sx={{ fontSize: 25 }}
+              />
+              <p className=" text-xs  text-slate-600 scroll ">Notifications</p>
+            </div>
 
-          <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
-          <img
-              src={userData.imageURL}
-              className="w-8 rounded-full "
-              alt="profile"
-            />
-            {/* <AccountCircleIcon
+            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+              <img
+                src={userData.imageURL}
+                className="w-8 rounded-full "
+                alt="profile"
+              />
+              {/* <AccountCircleIcon
               className="text-slate-400 hover:text-black "
               sx={{ fontSize: 25 }}
             /> */}
-            <p className=" text-xs  text-slate-600 scroll text-nowrap" onClick={handleSignOut}> {userName==null?"My Account":userName}</p>
+              <p
+                className=" text-xs  text-slate-600 scroll text-nowrap"
+                onClick={handleSignOut}
+              >
+                {" "}
+                {userName == null ? "My Account" : userName}
+              </p>
+            </div>
           </div>
-
         </div>
       </div>
-    </div>
-    {
-      userName!="My Account"?
-      <Messenger />:null
-    }
+      {userName && <Messenger />}
     </>
   );
 };

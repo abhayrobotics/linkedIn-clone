@@ -103,8 +103,8 @@ const AccountPage = () => {
             </div>
             {/* Certification and other Details */}
             <div>
-              <Activity />
-              <Activity />
+              <Activity heading={"Experience"}/>
+              <Activity heading={"Education"}/>
             </div>
             {/* posts */}
             

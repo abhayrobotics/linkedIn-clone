@@ -96,7 +96,7 @@ const CreatePost = () => {
 
   return (
     <div className="absolute w-svw bg-black bg-opacity-40 z-30 h-svh">
-      <div className=" absolute left-1/2 -translate-x-1/2 my-10 w-[50svw] min-h-[500px] h-[60svh] border bg-white rounded-lg ">
+      <div className=" absolute left-1/2 -translate-x-1/2 my-10 w-[90%] md:w-[50svw] min-h-[500px] h-[60svh] border bg-white rounded-lg ">
         <div>
           {/* ******************************** User Name */}
           <div className="flex  justify-between p-4  ">
@@ -118,14 +118,14 @@ const CreatePost = () => {
           <div>
             <textarea
               value={postText} onChange={(e) =>setPostText(e.target.value)}
-              className="p-2 w-full h-[48svh] border-none outline-none resize-none px-3 py-3 text-lg"
+              className="p-2 w-full min-h-[48svh] border-none outline-none resize-none px-3 py-3 text-lg"
               type="text"
               placeholder="What do you want to post ?"
             />
             {/* <input type="file" onChange={(e) => setImageP(e.target.files[0])} /> */}
           </div>
           <hr className="my-2" />
-          <div className="flex justify-between  mx-3 ">
+          <div className="flex flex-wrap justify-between  mx-3 ">
             <button className="bg-red-500 px-5 py-1 rounded-2xl text-white text-md font-semibold" onClick={geminiAi}>
               Improvise with AI ✨
             </button>
