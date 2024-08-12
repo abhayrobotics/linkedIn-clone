@@ -74,8 +74,20 @@ const Header = ({ show }) => {
       >
         <div className="flex justify-between max-w-7/12 w-9/12">
           <div className="flex items-center py-2 px-5 text-mainColor ">
-            <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />
-            <SearchIcon sx={{ fontSize: 25 }} color="primary" />
+            <Link
+              to="/feed"
+              onClick={() => dispatch(updatePageLocation("/feed"))}
+            >
+              <LinkedInIcon sx={{ fontSize: 44 }} color="primary" />
+            </Link>
+            <div className="items-center w-24 justify-start hidden md:flex   ">
+              <SearchIcon sx={{ fontSize: 25 }} color="primary" />
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-72 bg-slate-100 px-2 py-1 rounded-md"
+              />
+            </div>
           </div>
           {/* *********************icons**************** */}
           <div className="flex items-center ">
@@ -107,7 +119,7 @@ const Header = ({ show }) => {
               </div>
             </Link>
 
-            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer  hidden sm:flex ">
               <WorkIcon
                 className="text-slate-400 hover:text-black "
                 sx={{ fontSize: 25 }}
@@ -124,12 +136,12 @@ const Header = ({ show }) => {
               </div>
             </Link>
 
-            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
+            <div className=" flex-col mx-2 items-center hover:text-black cursor-pointer  hidden sm:flex ">
               <NotificationsIcon
                 className="text-slate-400 hover:text-black "
                 sx={{ fontSize: 25 }}
               />
-              <p className=" text-xs  text-slate-600 scroll ">Notifications</p>
+              <p className=" text-xs  text-slate-600 scroll">Notifications</p>
             </div>
 
             <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
