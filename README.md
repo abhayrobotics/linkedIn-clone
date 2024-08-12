@@ -378,3 +378,5 @@ const handlePost = async () => {
   - Send message- using addDoc storing the message in db 
   - message - looping the component for UI. design based on owner or receiver.
             -
+
+## Gemini AI

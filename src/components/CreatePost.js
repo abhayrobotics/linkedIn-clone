@@ -16,10 +16,12 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import photo from "../assets/photo.jpg";
 
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { model } from "../utils/geminiai";
 
 const CreatePost = () => {
   const dispatch = useDispatch();
-  const postText = useRef();
+  // const postText = useRef();
+  let [postText,setPostText ]= useState("");
   const [imageP, setImageP] = useState("");
   const [imagePostURL, setImagePosturl] = useState("");
 
@@ -32,7 +34,18 @@ const CreatePost = () => {
   }, [imagePostURL]);
   //   linking thepost to firebase store
 
+  const geminiAi = async ()=>{
+    console.log(postText)
+    const prompt =`Acting as a Linkedin Expert. Improve the  LinkedIn post written as :" `+postText+`" and give only one improved result  inside ";" Example:
+ ";Thrilled to announce I've joined Google as a Software Engineer! 🎉;" `
+ 
+    const result = await model.generateContent(prompt);
+    const reponse =  result.response;
+    const text = reponse.text().split(";")[1];
+    // console.log(text);
+    setPostText(text)
   
+  }
 
   const handlePost = async () => {
     // console.log(postText.current.value, serverTimestamp());
@@ -60,7 +73,7 @@ const CreatePost = () => {
 
       // const date1 = new Date();
       const docRef = await addDoc(collection(db, "Posts"), {
-        post: postText.current.value,
+        post: postText,
         postImg: imagePostURL,
         date: serverTimestamp(),
         username: UserData1?.displayName,
@@ -104,7 +117,7 @@ const CreatePost = () => {
           {/* ************************* Post content */}
           <div>
             <textarea
-              ref={postText}
+              value={postText} onChange={(e) =>setPostText(e.target.value)}
               className="p-2 w-full h-[48svh] border-none outline-none resize-none px-3 py-3 text-lg"
               type="text"
               placeholder="What do you want to post ?"
@@ -112,8 +125,11 @@ const CreatePost = () => {
             {/* <input type="file" onChange={(e) => setImageP(e.target.files[0])} /> */}
           </div>
           <hr className="my-2" />
-          <div className="flex justify-end  mx-3 " onClick={handlePost}>
-            <button className="bg-mainColor px-5 py-1 rounded-2xl text-white text-md font-semibold">
+          <div className="flex justify-between  mx-3 ">
+            <button className="bg-red-500 px-5 py-1 rounded-2xl text-white text-md font-semibold" onClick={geminiAi}>
+              Improvise with AI ✨
+            </button>
+            <button className="bg-mainColor px-5 py-1 rounded-2xl text-white text-md font-semibold"  onClick={handlePost}>
               Post
             </button>
           </div>
