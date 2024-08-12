@@ -27,7 +27,7 @@ const Header = ({show}) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user)
+        // console.log(user)
         //   dispacth an action using reducer fn()
         const name3 = user?.displayName===null?userData.userName:user?.displayName;
         dispatch(addUserEmail(user.email));

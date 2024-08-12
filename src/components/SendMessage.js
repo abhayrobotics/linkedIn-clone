@@ -25,7 +25,7 @@ const SendMessage = ({scroll}) => {
     }
 
     const { uid, displayName, photoURL } = auth.currentUser;
-    console.log(displayName);
+    // console.log(displayName);
     const timeStamp = serverTimestamp();
 
     await addDoc(collection(db, "messages"), {

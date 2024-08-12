@@ -108,7 +108,7 @@ const Login = () => {
           const user = userCredential.user;
           const name2 = email1?.current?.value?.split("@")[0];
           // ...
-          console.log("signup sucess", email1?.current?.value?.split("@")[0]);
+          // console.log("signup sucess", email1?.current?.value?.split("@")[0]);
           // addding user data
           dispatch(addUserEmail(user?.email));
           dispatch(addUserName(name2));

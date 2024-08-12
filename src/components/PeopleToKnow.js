@@ -19,7 +19,7 @@ const PeopleToKnow = () => {
         const queryData = await getDocs(collection(db,'users'));
         
         queryData.forEach((doc)=>{
-          console.log(doc.data());
+          // console.log(doc.data());
           if(doc.data().email1 !== user1.email){
 
             usersData.push(doc.data())
@@ -27,7 +27,7 @@ const PeopleToKnow = () => {
         
         })
         setData1(usersData);
-        console.log(usersData);
+        // console.log(usersData);
           };
 
   return (
