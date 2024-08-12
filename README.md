@@ -380,3 +380,4 @@ const handlePost = async () => {
             -
 
 ## Gemini AI
+- npm install @google/generative-ai

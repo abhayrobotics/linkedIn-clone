@@ -19,7 +19,7 @@ const News = () => {
   const now = new Date();
   // console.log(now.getDate() - newsData[6]?.publishedAt?.split("T")[0]?.split("-")[2]);
   return (
-    newsData.length>0 && (<div>
+    newsData!==undefined && (<div>
       
       <div className=" max-w-[250px] min-w-16 m-1 mx-3   h-fit bg-white  rounded-lg  ">
         <div>
