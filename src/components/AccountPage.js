@@ -7,7 +7,7 @@ import { auth, db } from "../utils/firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Activity from "./Activity";
 import Post from "./Post";
-const AccountPage = () => {
+const AccountPage = ({uid}) => {
   const { imageURL, userName } = useSelector((store) => store.user);
   const data = useAuthState(auth)[0];
   const [allDetails, setAllDetails] = useState([]);

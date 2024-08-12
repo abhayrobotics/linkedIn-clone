@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import banner from "../assets/banner.png";
 import { updatePageLocation } from "../utils/userSlice";
@@ -7,7 +7,9 @@ import PersonAddAlt1Icon from "@mui/icons-material/PersonAddAlt1";
 
 const Profile = ({ mainProfile,data }) => {
   const UserData = useSelector((store) => store.user);
-  // console.log(data)
+  const [connectMsg,setConnectMsg] = useState("Connect")
+ 
+  console.log(data)
   const dispatch = useDispatch();
   return (
     <div className=" m-1  max-w-screen sm:max-w-[250px]  min-w-[200px] border border-slate-300 h-56 bg-white hover:shadow-md   rounded-lg overflow-hidden">
@@ -15,7 +17,7 @@ const Profile = ({ mainProfile,data }) => {
         <img src={data?.banner} alt="banner" className="absolute top-0 " />
         <div className=" relative z-10 flex flex-col items-center py-3   ">
           <img
-            src={data?.image}
+            src={data?.photo}
             className="w-16 rounded-full mt-6"
             alt="profile"
           />
@@ -54,11 +56,15 @@ const Profile = ({ mainProfile,data }) => {
           </>
         ) : (
           <div className="flex justify-center">
-            <button className="px-4 py-1 text-center text-mainColor font-semibold rounded-full border border-mainColor hover:bg-mainColor hover:bg-opacity-10 ">
-              Connect
-              <span className="px-1">
+            <button onClick={()=>{setConnectMsg("Pending")}} className={`px-4 py-1 text-center ${connectMsg === "Pending" ?"text-slate-500 border-slate-500 hover:bg-slate-500":"text-mainColor border-mainColor hover:bg-mainColor"}
+             font-semibold rounded-full border  hover:bg-opacity-10 `}>
+              {connectMsg}
+              {connectMsg === "Pending" ? null:(
+
+                <span className="px-1">
                 <PersonAddAlt1Icon color="primary" />
-              </span>{" "}
+              </span>
+              )}
             </button>
           </div>
         )}

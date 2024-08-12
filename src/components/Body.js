@@ -26,6 +26,11 @@ const Body = () => {
         path:"/network",
         element:<Network/>
 
+    },
+    {
+        path:"/profile/:id",
+        element:<AccountPage/>
+
     }
   ]);
 

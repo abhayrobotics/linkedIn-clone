@@ -31,10 +31,10 @@ const PeopleToKnow = () => {
           };
 
   return (
-    <div className="flex   w-9/12 pl-3 pb-3">
+    <div className="flex  w-[90%] mx-auto md:w-9/12  md:pl-3 pb-3">
         
         {/* side ui */}
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
             <div>
             <h1 className="text-lg pl-2 pb-2">My Network</h1>
                 <div className="flex flex-wrap  mb-2">
@@ -46,7 +46,7 @@ const PeopleToKnow = () => {
        
             <div className="p-3 rounded-lg bg-white border ">
                 <h1 className="text-lg" >People you may know based on your recent activity</h1>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap justify-evenly md:justify-normal ">
                     {data1?.map((user)=>(
                         
                         <FriendProfile mainProfile={false} data={user} key={user?.name1}/>

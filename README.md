@@ -51,7 +51,7 @@
 - Account Page
       - Banner and Basic Info
       - Activity
-      - Post(multiple)
+      - Post(multiple):pending
 - Network Page
   - Profile
   - PeopleToknow
