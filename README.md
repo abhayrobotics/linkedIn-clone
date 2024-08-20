@@ -1,5 +1,4 @@
-## Stack used
-
+## Stack used 
 - React
 - react-router-dom
 - tailwind
