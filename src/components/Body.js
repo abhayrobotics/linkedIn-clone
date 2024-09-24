@@ -4,6 +4,7 @@ import Feed from "./Feed";
 
 import AccountPage from "./AccountPage";
 import Network from "./Network";
+import { Jobs } from "./Jobs";
 
 
 
@@ -25,6 +26,11 @@ const Body = () => {
     {
         path:"/network",
         element:<Network/>
+
+    },
+    {
+        path:"/jobs",
+        element:<Jobs/>
 
     },
     {

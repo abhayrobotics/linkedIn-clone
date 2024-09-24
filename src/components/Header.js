@@ -118,14 +118,15 @@ const Header = ({ show }) => {
                 </p>
               </div>
             </Link>
-
-            <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer  hidden sm:flex ">
-              <WorkIcon
-                className="text-slate-400 hover:text-black "
-                sx={{ fontSize: 25 }}
-              />
-              <p className=" text-xs  text-slate-600 scroll ">Jobs</p>
-            </div>
+            <Link to="/jobs" onClick={() => dispatch(updatePageLocation("/jobs"))}>
+              <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer  hidden sm:flex ">
+                <WorkIcon
+                  className="text-slate-400 hover:text-black "
+                  sx={{ fontSize: 25 }}
+                />
+                <p className=" text-xs  text-slate-600 scroll ">Jobs</p>
+              </div>
+            </Link>
             <Link onClick={() => dispatch(toggleMessageStatus())}>
               <div className="flex flex-col mx-2 items-center hover:text-black cursor-pointer ">
                 <TextsmsIcon
