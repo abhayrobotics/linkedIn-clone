@@ -12,7 +12,6 @@
 - news API
 - redux Toolkit
 
-
 ## Features to add
 
 - login page✅
