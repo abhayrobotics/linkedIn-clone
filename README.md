@@ -1,5 +1,7 @@
-## Stack used
+## [GO TO WEBSITE](https://linked-in-abhay.netlify.app/)
 
+
+## Stack used 
 - React
 - react-router-dom
 - tailwind
@@ -9,7 +11,6 @@
 - realtime firestore db
 - news API
 - redux Toolkit
-
 
 ## Features to add
 
